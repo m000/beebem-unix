@@ -32,7 +32,7 @@
 
 #include "windows.h"
 #include "beebwin.h"
-#include "sdl.h"
+#include "beebsdl.h"
 
 #include "gui/functions.h"
 #include "gui/gui.h"

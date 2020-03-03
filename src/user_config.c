@@ -32,7 +32,7 @@
 
 #include "user_config.h"
 #include "gui/gui.h"
-#include <sdl.h>
+#include "beebsdl.h"
 #include "beebem.h"
 
 #include <stdio.h>

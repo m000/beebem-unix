@@ -8,7 +8,6 @@
 #include <SDL.h>
 
 #include <stdlib.h>
-#include "sdl.h"
 #include "types.h"
 
 

@@ -23,7 +23,7 @@
 # include <config.h>
 #endif
 
-#include "sdl.h"
+#include "beebsdl.h"
 
 #include "line.h"
 #include "log.h"

@@ -67,7 +67,7 @@
 
 #include "line.h"	// SDL Stuff
 #include "log.h"
-#include "sdl.h"
+#include "beebsdl.h"
 
 #include "gui/gui.h"
 

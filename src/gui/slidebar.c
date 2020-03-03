@@ -27,7 +27,7 @@
 
 #include "gui/widget_shared.h"
 
-#include "gui/sdl.h"
+#include "gui/guisdl.h"
 
 #include <SDL.h>
 

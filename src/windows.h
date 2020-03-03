@@ -10,7 +10,7 @@
 
 #include <SDL.h>
 #include "log.h"
-#include "sdl.h"
+#include "beebsdl.h"
 
 #include "beebem_pages.h"
 

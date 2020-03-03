@@ -9,7 +9,7 @@
 
 #include "log.h"
 
-#include "sdl.h"
+#include "beebsdl.h"
 //#include "include/gui_functions.h"
 
 #include "gui/gui.h"

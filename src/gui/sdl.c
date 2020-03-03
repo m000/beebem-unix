@@ -3,7 +3,7 @@
 # include <config.h>
 #endif
 
-#include "gui/sdl.h"
+#include "gui/guisdl.h"
 
 #include "gui/line.h"
 #include "../log.h"

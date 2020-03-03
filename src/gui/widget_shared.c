@@ -27,7 +27,7 @@
 /* Needed for additional debugging code below.
  */
 #ifdef EG_DEBUG
-#	include <gui/sdl.h>
+#	include "gui/guisdl.h"
 #endif
 
 /* Generic callback implementations:

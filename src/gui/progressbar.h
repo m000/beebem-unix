@@ -17,7 +17,7 @@
 #endif
 
 #include "gui/types.h"
-#include "gui/sdl.h"
+#include "gui/guisdl.h"
 
 #include "gui/window.h"
 #include "gui/widget.h"

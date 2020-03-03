@@ -25,6 +25,6 @@
 
 #include "gui/messagebox.h"
 
-#include "gui/sdl.h"
+#include "gui/guisdl.h"
 
 #include <SDL.h>
