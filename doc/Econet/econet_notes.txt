@@ -1,0 +1,100 @@
+Econet Notes
+------------
+
+Rob O'Donnell. robert@irrelevant.com. 28/12/2004.
+Mike Wyatt - Dec 2005.
+
+Useful docs to read (available from http://www.bbcdocs.com/):
+
+- MC6845 data sheet
+- Acorn Econet Advanced User Guide
+- Econet Layers
+
+Econet has a network number x, and station number y.
+where x < 128 for "real" econet, 128+ for ethernet.
+Default Acorn AUN Econet over Ethernet uses IP 1.0.x.y
+Apparently always uses UDP to port 32768.
+
+In an emulation environment this is less than ideal as we may wish
+to run multiple emulated machines on one PC.
+
+We will instead allow any station to exist on any IP/port combination.
+
+Use 'econet.cfg' file for the moment - see notes in file.
+
+----------------------------------------------------------------------------
+Implementation in BeebEm
+
+- added: read from FE18 (not fe20 as per AUG) returns station number
+  note:  read/write from FE18 sets INTOFF line
+  note:  read from FE20 sets INTON
+         and can trigger an NMI immediately if 68B54 was already
+         holding line waiting to be noticed
+
+- added: EconetNMIenabled flag, set as per reads above
+
+- added: read/write from FEA0-FEA3 to ADLC.
+
+- added: econet polling routine to handle UDP transfers, setting
+         of adlc registers etc.
+
+- added: command line parameter to set station number
+         (defaults to first free station/port in econet.cfg)
+
+----------------------------------------------------------------------------
+
+We are intercepting data at the hardware level.  The 68B54 does not know any
+address itself; it broadcasts what it's given and reports back anything it
+receives.  A packet consists of:
+
+  Econet AUG says:         flag,dest,source,data,crc,flag
+  MC6854 data sheet says:  flag,dest,control,data,crc,flag
+
+Thus we just need to send every packet to all stations other than our own
+listed in econet.cfg.
+
+It is up to the beeb cpu to send everyhting between the flags and crc.
+Flags & crc are added automatically (not emulated).
+
+Receiving beeb nfs will watch for 'our' station id and issue a discard for
+anything else (unless listening on port 0).
+
+In Econet, when data is coming across the lan, the ADLC will send INTs.
+These are masked by INTON/INTOFF to the 6502 NMI line.  So, when econet is
+off, they will be totally ignored - but can hit you as soon as you set
+INTON!
+
+The 65B54 has a three byte fifo on rx & tx.  This means that if data is not
+fetched quickly enough, you will get a receiver overrun error. (SR2b6)
+
+For our application, we are using UDP packets.  We have a poll routine
+runs every so often, that will:
+- copy data from the fifo into a tx buffer
+- if was last byte (CR2b4 set) then finish off and send the UDP packet
+- clear CR2b4) - status flags?
+- is there a received udp packet in memory is discontinue bit set? (CR1b5)
+  - if so, discard udp packet, set flags accordingly.
+  - check if space in receive fifo, if there is, copy in next byte, set 
+    flags.
+- if no packet in mem try and fetch another udp packet
+    
+-------------------------------------------------------------------
+
+REST STATE of a REAL BBC Micro (with or without nfs installed)
+
+status 1 - 16	- CTS - cts comes from data lines, and will therefore
+   be a collision detection. (CTS is active low, this not available to
+   send, normal as Tx is held in reset normally)
+
+status 2 - 32   - DCD - dcd is derived directly from the clock signal.
+   (DCD is active low, thus this is flagging a DCD error)
+
+- machine reports No Clock on boot.
+
+REAL BBC micro with clock box only attached
+
+status1 - 16 - CTS
+
+status2 - 4 - RxIdle
+
+-------------------------------------------------------------------
