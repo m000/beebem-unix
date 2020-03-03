@@ -15,7 +15,7 @@
 
 #include "gui/functions.h"
 
-#include "gui/sdl.h"
+#include "gui/guisdl.h"
 
 #include "gui/window.h"
 #include "gui/window_private.h"

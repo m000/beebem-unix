@@ -30,8 +30,8 @@
 #include <config.h>
 #endif
 
+#include "beebsdl.h"
 #include "beebwin.h"
-#include "sdl.h"
 #include "windows.h"
 
 #include "gui/functions.h"

@@ -63,9 +63,9 @@
 #include "z80.h"
 #include "z80mem.h"
 
+#include "beebsdl.h"
 #include "line.h" // SDL Stuff
 #include "log.h"
-#include "sdl.h"
 
 #include "gui/gui.h"
 

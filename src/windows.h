@@ -8,8 +8,8 @@
 #include <config.h>
 #endif
 
+#include "beebsdl.h"
 #include "log.h"
-#include "sdl.h"
 #include <SDL.h>
 
 #include "beebem_pages.h"

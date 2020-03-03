@@ -14,7 +14,7 @@
 #include "../log.h"
 #include "gui/functions.h"
 
-#include "gui/sdl.h"
+#include "gui/guisdl.h"
 
 #include "gui/tabgroup.h"
 #include "gui/tabgroup_private.h"
