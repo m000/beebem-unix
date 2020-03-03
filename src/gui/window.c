@@ -650,7 +650,8 @@ static EG_BOOL MoveFocus(EG_Window *window_ptr, int direction)
 /* Public functions:
  */
 
-EG_Window *EG_Window_Create(char *name_ptr, SDL_Surface *surface_ptr, SDL_Color background_color, SDL_Rect dimension)
+EG_Window *EG_Window_Create(const char *name_ptr, SDL_Surface *surface_ptr, SDL_Color background_color,
+                            SDL_Rect dimension)
 {
     EG_Window *window_ptr = NULL;
 
