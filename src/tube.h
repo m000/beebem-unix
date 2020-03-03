@@ -24,7 +24,7 @@
 #define TUBE6502_HEADER
 
 #if HAVE_CONFIG_H
-#	include <config.h>
+#include <config.h>
 #endif
 
 #include "port.h"
@@ -32,7 +32,7 @@
 extern unsigned char R1Status;
 void ResetTube(void);
 
-extern unsigned char EnableTube,TubeEnabled,Tube186Enabled,AcornZ80;
+extern unsigned char EnableTube, TubeEnabled, Tube186Enabled, AcornZ80;
 extern int TorchTubeActive;
 
 extern unsigned char TubeintStatus; /* bit set (nums in IRQ_Nums) if interrupt being caused */
@@ -41,15 +41,16 @@ extern unsigned char TubeNMIStatus; /* bit set (nums in NMI_Nums) if NMI being c
 // EnableTube - Should the tube be enabled on next start - 1=yes
 // TubeEnabled - Is the tube enabled by default - 1=yes
 
-typedef enum TubeIRQ {
-	R1,
-	R4,
+typedef enum TubeIRQ
+{
+    R1,
+    R4,
 } TubeIRQ;
 
-typedef enum TubeNMI {
-	R3,
+typedef enum TubeNMI
+{
+    R3,
 } TubeNMI;
-
 
 /*-------------------------------------------------------------------------*/
 /* Initialise 6502core                                                     */
@@ -65,13 +66,13 @@ void WrapTubeCycles(void);
 void SyncTubeProcessor(void);
 unsigned char ReadTubeFromHostSide(unsigned char IOAddr);
 unsigned char ReadTubeFromParasiteSide(unsigned char IOAddr);
-void WriteTubeFromHostSide(unsigned char IOAddr,unsigned char IOData);
-void WriteTubeFromParasiteSide(unsigned char IOAddr,unsigned char IOData);
+void WriteTubeFromHostSide(unsigned char IOAddr, unsigned char IOData);
+void WriteTubeFromParasiteSide(unsigned char IOAddr, unsigned char IOData);
 
 unsigned char ReadTorchTubeFromHostSide(unsigned char IOAddr);
 unsigned char ReadTorchTubeFromParasiteSide(unsigned char IOAddr);
-void WriteTorchTubeFromHostSide(unsigned char IOAddr,unsigned char IOData);
-void WriteTorchTubeFromParasiteSide(unsigned char IOAddr,unsigned char IOData);
+void WriteTorchTubeFromHostSide(unsigned char IOAddr, unsigned char IOData);
+void WriteTorchTubeFromParasiteSide(unsigned char IOAddr, unsigned char IOData);
 
 unsigned char TubeReadMem(unsigned int IOAddr);
 void DebugTubeState(void);

@@ -6,21 +6,22 @@
 #define DEBUG_HEADER
 
 #if HAVE_CONFIG_H
-#	include <config.h>
+#include <config.h>
 #endif
 
-#include "windows.h"
 #include "viastate.h"
+#include "windows.h"
 
 extern int DebugEnabled;
 
-enum DebugType {
-	DEBUG_VIDEO,
-	DEBUG_USERVIA,
-	DEBUG_SYSVIA,
-	DEBUG_TUBE,
-	DEBUG_SERIAL,
-	DEBUG_ECONET
+enum DebugType
+{
+    DEBUG_VIDEO,
+    DEBUG_USERVIA,
+    DEBUG_SYSVIA,
+    DEBUG_TUBE,
+    DEBUG_SERIAL,
+    DEBUG_ECONET
 };
 
 int DebugDisassembleInstruction(int addr, bool host, char *opstr);

@@ -5,15 +5,15 @@
 #define _DW_PAGES_DISKS_H_
 
 #if HAVE_CONFIG_H
-#       include <config.h>
+#include <config.h>
 #endif
-
 
 #include "gui.h"
 #include "gui_widget_private.h"
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #ifdef __cplusplus
@@ -23,6 +23,3 @@ extern "C" {
 /* END OF beebem_pages_disks.h ----------------------------------------------------------------
  */
 #endif
-
-
-

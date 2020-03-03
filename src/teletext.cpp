@@ -2,24 +2,24 @@
 
 /*
 
-Offset  Description                 Access  
-+00     data						R/W  
-+01     read status                 R  
-+02     write select                W  
-+03     write irq enable            W  
+Offset  Description                 Access
++00     data						R/W
++01     read status                 R
++02     write select                W
++03     write irq enable            W
 
 
 */
 
+#include "teletext.h"
+#include "6502core.h"
+#include "beebmem.h"
+#include "debug.h"
+#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "teletext.h"
-#include "debug.h"
-#include "6502core.h"
-#include "main.h"
-#include "beebmem.h"
 
-char TeleTextAdapterEnabled=0;
+char TeleTextAdapterEnabled = 0;
 int TeleTextStatus = 0xef;
 bool TeleTextInts = false;
 int rowPtrOffset = 0x00;
@@ -35,12 +35,12 @@ unsigned char row[16][43];
 
 void TeleTextLog(char *text, ...)
 {
-FILE *f;
-va_list argptr;
+    FILE *f;
+    va_list argptr;
 
     return;
 
-	va_start(argptr, text);
+    va_start(argptr, text);
 
     f = fopen("/tmp/teletext.log", "at");
     if (f)
@@ -49,26 +49,27 @@ va_list argptr;
         fclose(f);
     }
 
-	va_end(argptr);
+    va_end(argptr);
 }
 
 void TeleTextInit(void)
 
 {
-char buff[256];
+    char buff[256];
 
     TeleTextStatus = 0xef;
 
     rowPtr = 0x00;
     colPtr = 0x00;
 
-    if (txtFile) fclose(txtFile);
+    if (txtFile)
+        fclose(txtFile);
 
     if (!TeleTextAdapterEnabled)
         return;
 
     sprintf(buff, "%s/discims/txt%d.dat", RomPath, txtChnl);
-    
+
     txtFile = fopen(buff, "rb");
 
     if (txtFile)
@@ -81,67 +82,67 @@ char buff[256];
     txtCurFrame = 0;
 
     TeleTextLog("TeleTextInit Frames = %ld\n", txtFrames);
-
 }
 
-void TeleTextWrite(int Address, int Value) 
+void TeleTextWrite(int Address, int Value)
 {
     if (!TeleTextAdapterEnabled)
         return;
 
     TeleTextLog("TeleTextWrite Address = 0x%02x, Value = 0x%02x, PC = 0x%04x\n", Address, Value, ProgramCounter);
-	
+
     switch (Address)
     {
-		case 0x00:
-            if ( (Value & 0x0c) == 0x0c)
-            {
-                TeleTextInts = true;
-            }
-            if ( (Value & 0x0c) == 0x00) TeleTextInts = false;
-            if ( (Value & 0x10) == 0x00) TeleTextStatus &= ~0x10;       // Clear data available
+    case 0x00:
+        if ((Value & 0x0c) == 0x0c)
+        {
+            TeleTextInts = true;
+        }
+        if ((Value & 0x0c) == 0x00)
+            TeleTextInts = false;
+        if ((Value & 0x10) == 0x00)
+            TeleTextStatus &= ~0x10; // Clear data available
 
-            if ( (Value & 0x03) != txtChnl)
-            {
-                txtChnl = Value & 0x03;
-                TeleTextInit();
-            }
+        if ((Value & 0x03) != txtChnl)
+        {
+            txtChnl = Value & 0x03;
+            TeleTextInit();
+        }
 
-            break;
+        break;
 
-		case 0x01:
-            rowPtr = Value;
-            colPtr = 0x00;
-            break;
-		case 0x02:
-            row[rowPtr][colPtr++] = Value;
-            break;
-		case 0x03:
-            TeleTextStatus &= ~0x10;       // Clear data available
-			break;
+    case 0x01:
+        rowPtr = Value;
+        colPtr = 0x00;
+        break;
+    case 0x02:
+        row[rowPtr][colPtr++] = Value;
+        break;
+    case 0x03:
+        TeleTextStatus &= ~0x10; // Clear data available
+        break;
     }
 }
 
 int TeleTextRead(int Address)
 {
-int data = 0x00;
+    int data = 0x00;
 
     if (!TeleTextAdapterEnabled)
         return 0xff;
 
     switch (Address)
     {
-    case 0x00 :         // Data Register
+    case 0x00: // Data Register
         data = TeleTextStatus;
-   		intStatus&=~(1<<teletext);
+        intStatus &= ~(1 << teletext);
         break;
-    case 0x01:			// Status Register
+    case 0x01: // Status Register
         break;
     case 0x02:
 
         if (colPtr == 0x00)
-            TeleTextLog("TeleTextRead Reading Row %d, PC = 0x%04x\n", 
-                rowPtr, ProgramCounter);
+            TeleTextLog("TeleTextRead Reading Row %d, PC = 0x%04x\n", rowPtr, ProgramCounter);
 
         if (colPtr >= 43)
         {
@@ -149,9 +150,9 @@ int data = 0x00;
             colPtr = 0;
         }
 
-//        TeleTextLog("TeleTextRead Returning Row %d, Col %d, Data %d, PC = 0x%04x\n", 
-//            rowPtr, colPtr, row[rowPtr][colPtr], ProgramCounter);
-        
+        //        TeleTextLog("TeleTextRead Returning Row %d, Col %d, Data %d, PC = 0x%04x\n",
+        //            rowPtr, colPtr, row[rowPtr][colPtr], ProgramCounter);
+
         data = row[rowPtr][colPtr++];
 
         break;
@@ -161,20 +162,20 @@ int data = 0x00;
     }
 
     TeleTextLog("TeleTextRead Address = 0x%02x, Value = 0x%02x, PC = 0x%04x\n", Address, data, ProgramCounter);
-    
+
     return data;
 }
 
 void TeleTextPoll(void)
 
 {
-int i;
-char buff[13 * 43];
+    int i;
+    char buff[13 * 43];
 
     if (!TeleTextAdapterEnabled)
         return;
 
-    TeleTextStatus |= 0x10;       // teletext data available
+    TeleTextStatus |= 0x10; // teletext data available
 
     if (txtFile)
     {
@@ -182,10 +183,9 @@ char buff[13 * 43];
         if (TeleTextInts == true)
         {
 
+            intStatus |= 1 << teletext;
 
-            intStatus|=1<<teletext;
-
-//            TeleTextStatus = 0xef;
+            //            TeleTextStatus = 0xef;
             rowPtr = 0x00;
             colPtr = 0x00;
 
@@ -195,22 +195,22 @@ char buff[13 * 43];
             fread(buff, 13 * 43, 1, txtFile);
             for (i = 0; i < 16; ++i)
             {
-                switch(i)
+                switch (i)
                 {
-                case 0 :
-                case 14 :
-                case 15 :
+                case 0:
+                case 14:
+                case 15:
                     row[i][0] = 0x00;
                     break;
-                default :
+                default:
                     row[i][0] = 0x67;
                     memcpy(&(row[i][1]), buff + (i - 1) * 43, 42);
                 }
             }
-        
+
             txtCurFrame++;
-            if (txtCurFrame >= txtFrames) txtCurFrame = 0;
+            if (txtCurFrame >= txtFrames)
+                txtCurFrame = 0;
         }
     }
-
 }
