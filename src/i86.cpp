@@ -3632,7 +3632,7 @@ int le, i;
 
 	sprintf(buff + strlen(buff), "%s", buffer); 
 //--    WriteLog(buff);
-	printf(buff);
+	printf("%s", buff);
 
 }
 
