@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+// mstamat ???
 //## [TODO] ------------------
 //## Tapes are loaded over serial, and serial.cpp is currently disabled. So all this code does nothing at the moment.
 //## (usfstate saves the state, but does not compress, so does not use any of this code.)
@@ -18,18 +19,18 @@
 //--#undef HAVE_LIBZ
 //## -------------------------
 
-#ifdef HAVE_ZLIB_H
+#ifdef HAVE_ZLIB
+// prefer zlib
 #include <zlib.h>
 #else
-#ifdef HAVE_LIBZ
+// fallback to (ancient) libz
 #include "zlib/zlib.h"
-#endif
 #endif
 
 /* Only want uef support if have zlib.
  * (This will effect serial.cpp and beebem_pages.cpp)
  */
-#ifdef HAVE_LIBZ
+#ifdef ZLIB_H
 
 /* Beats representing normal tape speed (not sure why its 5600) */
 #define NORMAL_TAPE_SPEED 5600
@@ -648,4 +649,6 @@ static void gzput32(gzFile f, int b)
     gzputc(f, (b >> 24) & 0xff);
 }
 
+#else
+#warning no zlib headers found
 #endif
