@@ -105,7 +105,7 @@ unsigned char SerialPort;
 //--HANDLE hSerialPort=NULL; // Serial port handle
 //--DCB dcbSerialPort; // Serial port device control block
 char nSerialPort[5]; // Serial port name
-char *pnSerialPort=nSerialPort;
+const char *pnSerialPort=nSerialPort;
 unsigned char SerialPortOpen=0; // Indicates status of serial port (on the host)
 unsigned int SerialBuffer=0,SerialWriteBuffer=0;
 DWORD BytesIn,BytesOut;

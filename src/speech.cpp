@@ -536,7 +536,7 @@ void tms5220_reset_chip(struct tms5220 *chip)
 	
 }
 
-void logerror(char *text, ...)
+void logerror(const char *text, ...)
 {
 va_list argptr;
 	

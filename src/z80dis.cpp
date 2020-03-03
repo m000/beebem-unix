@@ -11,7 +11,7 @@
 #include "z80.h"
 
 typedef unsigned char UBYTE;
-typedef char * STR;
+typedef char const * STR;
 typedef char CHAR;
 
 int Z80_Disassemble(int adr, char *s)
