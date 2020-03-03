@@ -44,7 +44,7 @@
 #               define _STR1_(s)                #s
 #               define _STR2_(s)                _STR1_(s)
 #               define __STRLINE__              _STR2_(__LINE__)
-#               define __L__			__FILE__": "__STRLINE__": "
+#               define __L__                    __FILE__ ": " __STRLINE__ ": "
 #       endif
 #else
 #       define __L__				""
