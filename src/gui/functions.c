@@ -8,7 +8,7 @@
  */
 
 
-#include <gui/functions.h>
+#include "gui/functions.h"
 
 
 #define EG_DEBUG_MAXMALLOCS 50000

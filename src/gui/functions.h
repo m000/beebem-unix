@@ -34,8 +34,8 @@
 #include <stdarg.h>
 #include <string.h>
 
-#include <gui/types.h>
-#include <gui/line.h>
+#include "gui/types.h"
+#include "gui/line.h"
 #include "../log.h"
 
 

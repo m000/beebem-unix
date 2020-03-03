@@ -12,24 +12,24 @@
 #       include <config.h>
 #endif
 
-#include <gui/functions.h>
+#include "gui/functions.h"
 #include "../log.h"
 
-#include <gui/sdl.h>
+#include "gui/sdl.h"
 
-#include <gui/window.h>
-#include <gui/window_private.h>
+#include "gui/window.h"
+#include "gui/window_private.h"
 
-#include <gui/widget.h>
-#include <gui/widget_private.h>
+#include "gui/widget.h"
+#include "gui/widget_private.h"
 
-#include <gui/widget_shared.h>
+#include "gui/widget_shared.h"
 
-#include <gui/tabgroup.h>
-#include <gui/tabgroup_private.h>
+#include "gui/tabgroup.h"
+#include "gui/tabgroup_private.h"
 
-#include <gui/tabpage.h>
-#include <gui/tabpage_private.h>
+#include "gui/tabpage.h"
+#include "gui/tabpage_private.h"
 
 #include <SDL.h>
 

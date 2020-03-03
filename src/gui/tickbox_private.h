@@ -16,12 +16,12 @@
 #       include <config.h>
 #endif
 
-#include <gui/types.h>
+#include "gui/types.h"
 
-#include <gui/window.h>
-#include <gui/widget.h>
+#include "gui/window.h"
+#include "gui/widget.h"
 
-#include <gui/tickbox.h>
+#include "gui/tickbox.h"
 
 #include <SDL.h>
 

@@ -75,7 +75,7 @@
 #include "fake_registry.h"
 
 // Can remove this (only needed to calc string hash)
-//#include <gui_functions.h>
+//#include "gui_functions.h"
 
 
 #ifdef MULTITHREAD

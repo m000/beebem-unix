@@ -20,15 +20,15 @@
 
 //#include "include/gui.h"
 
-#include <gui/types.h>
+#include "gui/types.h"
 
-#include <gui/widget.h>
-#include <gui/window.h>
-#include <gui/box.h>
-#include <gui/label.h>
-#include <gui/button.h>
+#include "gui/widget.h"
+#include "gui/window.h"
+#include "gui/box.h"
+#include "gui/label.h"
+#include "gui/button.h"
 
-#include <gui/widget_private.h>
+#include "gui/widget_private.h"
 
 #ifdef __cplusplus
 extern "C" {

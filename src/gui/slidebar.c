@@ -14,20 +14,20 @@
 
 #include "../log.h"
 
-#include <gui/functions.h>
+#include "gui/functions.h"
 
-#include <gui/slidebar.h>
-#include <gui/slidebar_private.h>
+#include "gui/slidebar.h"
+#include "gui/slidebar_private.h"
 
-#include <gui/window.h>
-#include <gui/window_private.h>
+#include "gui/window.h"
+#include "gui/window_private.h"
 
-#include <gui/widget.h>
-#include <gui/widget_private.h>
+#include "gui/widget.h"
+#include "gui/widget_private.h"
 
-#include <gui/widget_shared.h>
+#include "gui/widget_shared.h"
 
-#include <gui/sdl.h>
+#include "gui/sdl.h"
 
 #include <SDL.h>
 

@@ -16,14 +16,14 @@
 #       include <config.h>
 #endif
 
-#include <gui/types.h>
+#include "gui/types.h"
 
-#include <gui/window.h>
-#include <gui/widget.h>
+#include "gui/window.h"
+#include "gui/widget.h"
 
-#include <gui/radiogroup.h>
+#include "gui/radiogroup.h"
 
-#include <gui/togglebutton.h>
+#include "gui/togglebutton.h"
 
 #include <SDL.h>
 

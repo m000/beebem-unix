@@ -22,7 +22,7 @@
 #       include <config.h>
 #endif
 
-#include <gui/widget_shared.h>
+#include "gui/widget_shared.h"
 
 /* Needed for additional debugging code below.
  */

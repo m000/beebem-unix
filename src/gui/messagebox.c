@@ -12,10 +12,10 @@
 
 #include "../log.h"
 
-#include <gui/messagebox.h>
-#include <gui/messagebox_private.h>
+#include "gui/messagebox.h"
+#include "gui/messagebox_private.h"
 
-#include <gui/functions.h>
+#include "gui/functions.h"
 
 #include <SDL.h>
 

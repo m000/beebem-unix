@@ -16,14 +16,14 @@
 #       include <config.h>
 #endif
 
-#include <gui/types.h>
+#include "gui/types.h"
 
 #include <SDL.h>
 
-#include <gui/window.h>
-#include <gui/widget.h>
+#include "gui/window.h"
+#include "gui/widget.h"
 
-#include <gui/box.h>
+#include "gui/box.h"
 
 
 /* Get EG_Box struct.

@@ -3,11 +3,11 @@
 # include <config.h>
 #endif
 
-#include <gui/sdl.h>
+#include "gui/sdl.h"
 
-#include <gui/line.h>
+#include "gui/line.h"
 #include "../log.h"
-#include <gui/types.h>
+#include "gui/types.h"
 
 static EG_BOOL EG_DrawString_Initialise(void);
 static void EG_DrawString_Free(void);
