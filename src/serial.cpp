@@ -901,7 +901,7 @@ bool map_file(char *file_name)
     uef_setclock(TapeClockSpeed);
 
     file = uef_open(file_name);
-    if (file == NULL)
+    if (file == (intptr_t)NULL)
     {
         return (false);
     }
