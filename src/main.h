@@ -31,12 +31,11 @@
 #endif
 
 #include "beebwin.h"
+#include "sdl.h"
 #include "windows.h"
 
-#include "sdl.h"
-#include <functions.h>
-
-#include <gui.h>
+#include "gui/functions.h"
+#include "gui/gui.h"
 
 /* Fudge for command line --------
  */

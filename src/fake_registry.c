@@ -9,8 +9,8 @@
 
 #include "fake_registry.h"
 
-#include <functions.h>
-#include <gui.h>
+#include "gui/functions.h"
+#include "gui/gui.h"
 
 #include "user_config.h"
 

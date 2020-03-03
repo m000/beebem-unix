@@ -31,8 +31,8 @@
 #endif
 
 #include "beebem.h"
+#include "gui/gui.h"
 #include "user_config.h"
-#include <gui.h>
 #include <sdl.h>
 
 #include <stdio.h>
