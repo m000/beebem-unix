@@ -12,20 +12,20 @@
 #endif
 
 #include "../log.h"
-#include <gui/types.h>
+#include "gui/types.h"
 
-#include <gui/functions.h>
+#include "gui/functions.h"
 
-#include <gui/progressbar.h>
-#include <gui/progressbar_private.h>
+#include "gui/progressbar.h"
+#include "gui/progressbar_private.h"
 
-#include <gui/widget_shared.h>
+#include "gui/widget_shared.h"
 
-#include <gui/window.h>
-#include <gui/window_private.h>
+#include "gui/window.h"
+#include "gui/window_private.h"
 
-#include <gui/widget.h>
-#include <gui/widget_private.h>
+#include "gui/widget.h"
+#include "gui/widget_private.h"
 
 #include <SDL.h>
 
