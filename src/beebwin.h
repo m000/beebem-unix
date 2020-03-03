@@ -34,7 +34,7 @@
 #include "video.h"
 
 /* Used in message boxes */
-#define GETHWND (mainWin == NULL ? NULL : mainWin->GethWnd())
+#define GETHWND (mainWin == NULL ? (intptr_t)NULL : mainWin->GethWnd())
 
 typedef union EightUChars {
     unsigned char data[8];
