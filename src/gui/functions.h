@@ -32,8 +32,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "../log.h"
 #include <gui/line.h>
-#include <gui/log.h>
 #include <gui/types.h>
 
 /* The following three definitions exist because I don't know what pointers

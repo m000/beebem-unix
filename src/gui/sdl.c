@@ -5,8 +5,8 @@
 
 #include <gui/sdl.h>
 
+#include "../log.h"
 #include <gui/line.h>
-#include <gui/log.h>
 #include <gui/types.h>
 
 static EG_BOOL EG_DrawString_Initialise(void);

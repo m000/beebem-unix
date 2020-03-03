@@ -11,8 +11,8 @@
 #include <config.h>
 #endif
 
+#include "../log.h"
 #include <gui/functions.h>
-#include <gui/log.h>
 
 #include <gui/sdl.h>
 

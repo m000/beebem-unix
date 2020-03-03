@@ -13,7 +13,7 @@ EG_BUTTON_MIN_CLICK_TIME
 #include <config.h>
 #endif
 
-#include <gui/log.h>
+#include "../log.h"
 
 #include <gui/functions.h>
 
