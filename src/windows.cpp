@@ -7,7 +7,7 @@
 #include "beebem_pages.h"
 #include "fake_registry.h"
 
-#include <gui.h>
+#include "gui/gui.h"
 
 /* Fake windows stuff:
  */

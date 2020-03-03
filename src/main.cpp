@@ -69,7 +69,7 @@
 #include "log.h"
 #include "sdl.h"
 
-#include <gui.h>
+#include "gui/gui.h"
 
 #include "beebem_pages.h"
 #include "fake_registry.h"

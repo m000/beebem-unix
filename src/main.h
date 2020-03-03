@@ -32,11 +32,11 @@
 
 #include "windows.h"
 #include "beebwin.h"
-
-#include <functions.h>
 #include "sdl.h"
 
-#include <gui.h>
+#include "gui/functions.h"
+#include "gui/gui.h"
+
 
 /* Fudge for command line --------
  */
