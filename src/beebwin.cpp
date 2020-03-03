@@ -6237,16 +6237,27 @@ void BeebWin::QuickSave()
     char FileName1[_MAX_PATH];
     char FileName2[_MAX_PATH];
     int i;
+    int w;
 
     // Bump old quicksave files down
     for (i = 1; i <= 9; ++i)
     {
-        sprintf(FileName1, "%sbeebstate\\quicksave%d.uef", m_AppPath, i);
+        w = snprintf(FileName1, sizeof(FileName1), "%sbeebstate\\quicksave%d.uef", m_AppPath, i);
+        if (w < 0 || w >= sizeof(FileName1))
+        {
+            qERROR("QuickSave failed.");
+            return;
+        }
 
         if (i == 9)
-            sprintf(FileName2, "%sbeebstate\\quicksave.uef", m_AppPath);
+            w = snprintf(FileName2, sizeof(FileName2), "%sbeebstate\\quicksave.uef", m_AppPath);
         else
-            sprintf(FileName2, "%sbeebstate\\quicksave%d.uef", m_AppPath, i + 1);
+            w = snprintf(FileName2, sizeof(FileName2), "%sbeebstate\\quicksave%d.uef", m_AppPath, i + 1);
+        if (w < 0 || w >= sizeof(FileName2))
+        {
+            qERROR("QuickSave failed.");
+            return;
+        }
 
         MoveFileEx(FileName2, FileName1, MOVEFILE_REPLACE_EXISTING);
     }

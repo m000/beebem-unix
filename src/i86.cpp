@@ -3742,7 +3742,7 @@ void Dis186(void)
 
     sprintf(buff + strlen(buff), "%s", buffer);
     //--    WriteLog(buff);
-    printf(buff);
+    printf("%s", buff);
 }
 
 int i186_execute(int num_cycles)
