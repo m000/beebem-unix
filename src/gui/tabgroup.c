@@ -13,7 +13,7 @@
 #endif
 
 #include <gui/functions.h>
-#include <gui/log.h>
+#include "../log.h"
 
 #include <gui/sdl.h>
 

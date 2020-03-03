@@ -22,7 +22,7 @@
 #endif
 
 #include <gui/types.h>
-#include <gui/log.h>
+#include "../log.h"
 
 #include <SDL.h>
 

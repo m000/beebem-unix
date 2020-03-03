@@ -36,7 +36,7 @@
 
 #include <gui/types.h>
 #include <gui/line.h>
-#include <gui/log.h>
+#include "../log.h"
 
 
 

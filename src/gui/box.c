@@ -14,7 +14,7 @@
 
 
 #include <gui/types.h>
-#include <gui/log.h>
+#include "../log.h"
 
 #include <gui/functions.h>
 

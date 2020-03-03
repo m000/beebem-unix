@@ -10,7 +10,7 @@
 #       include <config.h>
 #endif
 
-#include <gui/log.h>
+#include "../log.h"
 
 #include <gui/messagebox.h>
 #include <gui/messagebox_private.h>
