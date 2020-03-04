@@ -7,6 +7,8 @@
  *
  */
 
+#include <stdio.h>
+
 #define BUFFER_LEN 256
 
 void LoadCSW(char *file);

@@ -27,6 +27,7 @@
 #include <config.h>
 #endif
 
+#include <stdio.h>
 #include "port.h"
 
 extern unsigned char R1Status;

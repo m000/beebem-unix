@@ -8,6 +8,8 @@
 #include <config.h>
 #endif
 
+#include "windows.h"
+
 extern unsigned char DWriteable[2]; // Write Protect
 unsigned char Read1770Register(unsigned char Register1770);
 void Write1770Register(unsigned char Register1770, unsigned char Value);
