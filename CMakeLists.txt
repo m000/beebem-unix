@@ -29,6 +29,11 @@ PKG_CHECK_MODULES(SDL REQUIRED sdl)
 PKG_CHECK_MODULES(GTK2 REQUIRED gtk+-2.0)
 PKG_CHECK_MODULES(ZLIB REQUIRED zlib)
 
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Cocoa")
+endif()
+
+
 # Set definitions for compilation.
 add_definitions(
     -DPACKAGE="${CMAKE_PROJECT_NAME}"
@@ -49,14 +54,26 @@ include_directories(
 
 # Add target executable.
 add_executable(beebem ${beebem_src})
+
+# Add libraries to target.
 target_link_libraries(beebem
     ${SDL_LIBRARIES}
     ${GTK2_LIBRARIES}
     ${ZLIB_LIBRARIES}
 )
 
+# Add library paths. This is only needed for MacOS.
+# For Linux, it shouldn't matter.
+if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.13.0") 
+target_link_directories(beebem
+    PUBLIC ${SDL_LIBRARY_DIRS}
+    PUBLIC ${GTK2_LIBRARY_DIRS}
+    PUBLIC ${ZLIB_LIBRARY_DIRS}
+)
+endif()
+
 get_cmake_property(_variableNames VARIABLES)
 list (SORT _variableNames)
 foreach (_variableName ${_variableNames})
-    message(STATUS "${_variableName}=${${_variableName}}")
+message(STATUS "${_variableName}=${${_variableName}}")
 endforeach()
