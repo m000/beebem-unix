@@ -169,7 +169,7 @@ int SASIRead(int Address)
 
         if (sasi.sel == false)
             data |= 0x80;
-        if (sasi.req = false)
+        if (sasi.req == false)
             data |= 0x40;
         if (sasi.cd == true)
             data |= 0x20;
