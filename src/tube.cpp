@@ -87,7 +87,7 @@ unsigned char TubeNMIStatus = 0; /* bit set (nums in NMI_Nums) if NMI being caus
 //## NMILock.
 //##
 //-- static unsigned int NMILock=0; /* Well I think NMI's are maskable - to stop repeated NMI's - the lock is released
-//when an RTI is done */
+// when an RTI is done */
 //++
 static unsigned int tube_NMILock = 0;
 //<-

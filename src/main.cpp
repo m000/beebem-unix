@@ -31,9 +31,9 @@
 #include <SDL.h>
 
 #ifdef WITH_UNIX_EXTRAS
-#include <sys/types.h>
 #include <dirent.h>
 #include <pwd.h>
+#include <sys/types.h>
 #endif
 
 #include "windows.h"

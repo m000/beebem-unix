@@ -725,7 +725,7 @@ static void VideoStartOfFrame(void)
     //--#endif
     //--    frametime/=(double)BEEB_DOTIME_SAMPLESIZE;
     //--    cerr << "Frametime: " << frametime << "s fps=" << (1/frametime) << "Total cycles=" << TotalCycles << "Cycles
-    //in last unit=" << (TotalCycles-OldCycles) << "\n";
+    // in last unit=" << (TotalCycles-OldCycles) << "\n";
     //--    OldCycles=TotalCycles;
     //--    previous=now;
     //--    Time_FrameCount=0;

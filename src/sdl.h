@@ -118,8 +118,9 @@ extern int Create_Screen(void);
  * first thing bad timing will effect is the sound..
  */
 
-#define FRAMESPERSECOND 50 // Number of times per second 'screen'
-                           // will update.
+#define FRAMESPERSECOND                                                                                                \
+    50 // Number of times per second 'screen'
+       // will update.
 
 /* Prototypes
  */

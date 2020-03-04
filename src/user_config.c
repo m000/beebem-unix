@@ -42,12 +42,12 @@
 /* Extra UNIX specific includes:
  */
 #ifdef WITH_UNIX_EXTRAS
+#include <dirent.h>
+#include <errno.h>
+#include <pwd.h>
+#include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include <pwd.h>
-#include <errno.h>
-#include <sys/stat.h>
-#include <dirent.h>
 #endif
 
 /* Sub directory (from DATA_DIR) for user configuration directory when not UNIX.

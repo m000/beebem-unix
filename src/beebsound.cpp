@@ -671,15 +671,15 @@ static void InitAudioDev(int sampleratein)
     //--		dsect=1;
     //-- 		hr = DirectSoundCreate(NULL, &DSound, NULL);
     //--		if (hr != DS_OK) MessageBox(GETHWND,"Attempt to start DirectSound system
-    //failed","BeebEm",MB_ICONERROR|MB_OK);
+    // failed","BeebEm",MB_ICONERROR|MB_OK);
     //--		if(hr == DS_OK)
     //--		{
     //--			hr=DS_OK;
     //--			if (UsePrimaryBuffer) {
     //--				hr = DSound->SetCooperativeLevel(mainWin->GethWnd(), DSSCL_WRITEPRIMARY);
     //--				if (hr == DSERR_UNSUPPORTED) {
-    //--					MessageBox(GETHWND,"Use of Primary DirectSound Buffer unsupported on this system. Using Secondary
-    //DirectSound Buffer instead",
+    //--					MessageBox(GETHWND,"Use of Primary DirectSound Buffer unsupported on this system. Using
+    //Secondary DirectSound Buffer instead",
     //--						"BBC Emulator",MB_OK|MB_ICONERROR);
     //--					UsePrimaryBuffer=0;
     //--				}

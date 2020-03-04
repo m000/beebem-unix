@@ -16,10 +16,10 @@ Offset  Description                 Access
 #include <config.h>
 #endif
 
-#include "scsi.h"
 #include "6502core.h"
 #include "beebmem.h"
 #include "main.h"
+#include "scsi.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -157,7 +157,7 @@ void SCSIWrite(int Address, int Value)
         return;
 
     //	SCSILog("SCSIWrite Address = 0x%02x, Value = 0x%02x, Phase = %d, PC = 0x%04x\n", Address, Value, scsi.phase,
-    //ProgramCounter);
+    // ProgramCounter);
 
     switch (Address)
     {
@@ -223,7 +223,7 @@ int SCSIRead(int Address)
     }
 
     //	fprintf(stderr, "SCSIRead Address = 0x%02x, Value = 0x%02x, Phase = %d, PC = 0x%04x\n", Address, data,
-    //scsi.phase, ProgramCounter);
+    // scsi.phase, ProgramCounter);
 
     return data;
 }
@@ -429,11 +429,12 @@ void Execute(void)
 
     //	if (scsi.cmd[0] <= 0x1f) {
     //		fprintf(stderr, "Execute 0x%02x, Param 1=0x%02x, Param 2=0x%02x, Param 3=0x%02x, Param 4=0x%02x, Param
-    //5=0x%02x, Phase = %d, PC = 0x%04x\n", 				scsi.cmd[0], scsi.cmd[1], scsi.cmd[2], scsi.cmd[3], scsi.cmd[4],
-    //scsi.cmd[5], scsi.phase, ProgramCounter); 	} else { 		fprintf(stderr, "Execute 0x%02x, Param 1=0x%02x, Param
-    //2=0x%02x, Param 3=0x%02x, Param 4=0x%02x, Param 5=0x%02x, Param 6=0x%02x, Param 7=0x%02x, Param 8=0x%02x, Param
-    //9=0x%02x, Phase = %d, PC = 0x%04x\n", 				scsi.cmd[0], scsi.cmd[1], scsi.cmd[2], scsi.cmd[3], scsi.cmd[4],
-    //scsi.cmd[5], scsi.cmd[6], scsi.cmd[7], scsi.cmd[8], scsi.cmd[9], scsi.phase, ProgramCounter);
+    // 5=0x%02x, Phase = %d, PC = 0x%04x\n", 				scsi.cmd[0], scsi.cmd[1], scsi.cmd[2], scsi.cmd[3],
+    // scsi.cmd[4], scsi.cmd[5], scsi.phase, ProgramCounter); 	} else { 		fprintf(stderr, "Execute 0x%02x, Param
+    // 1=0x%02x, Param 2=0x%02x, Param 3=0x%02x, Param 4=0x%02x, Param 5=0x%02x, Param 6=0x%02x, Param 7=0x%02x, Param
+    // 8=0x%02x, Param
+    // 9=0x%02x, Phase = %d, PC = 0x%04x\n", 				scsi.cmd[0], scsi.cmd[1], scsi.cmd[2], scsi.cmd[3],
+    // scsi.cmd[4], scsi.cmd[5], scsi.cmd[6], scsi.cmd[7], scsi.cmd[8], scsi.cmd[9], scsi.phase, ProgramCounter);
     //	}
 
     scsi.lun = (scsi.cmd[1]) >> 5;

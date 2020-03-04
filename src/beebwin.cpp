@@ -127,7 +127,7 @@ static const char *WindowTitle = "BeebEm";
 //--static const char *AboutText = "BeebEm - Emulating:\n\nBBC Micro Model B\nBBC Micro Model B + IntegraB\n"
 //--								"BBC Micro Model B Plus (128)\nAcorn Master 128\nAcorn 65C02 Second Processor\n"
 //--								"Torch Z80 Second Processor\nMaster 512 Second Processor\nAcorn Z80 Second
-//Processor\n\n"
+// Processor\n\n"
 //--								"Version 3.2, April 2006";
 
 /* Configuration file strings */
@@ -1456,7 +1456,8 @@ void BeebWin::SetAMXPosition(unsigned int x, unsigned int y)
 //--							if ((UserVIAState.ddrb & mask) == 0x00)
 //--							{
 //--								UserVIAState.irb &= ~mask;
-//--								ShowInputs( (UserVIAState.orb & UserVIAState.ddrb) | (UserVIAState.irb & (~UserVIAState.ddrb))
+//--								ShowInputs( (UserVIAState.orb & UserVIAState.ddrb) | (UserVIAState.irb &
+//(~UserVIAState.ddrb))
 //);
 //--								bit = true;
 //--							}
@@ -1516,7 +1517,8 @@ void BeebWin::SetAMXPosition(unsigned int x, unsigned int y)
 //--							if ((UserVIAState.ddrb & mask) == 0x00)
 //--							{
 //--								UserVIAState.irb |= mask;
-//--								ShowInputs( (UserVIAState.orb & UserVIAState.ddrb) | (UserVIAState.irb & (~UserVIAState.ddrb))
+//--								ShowInputs( (UserVIAState.orb & UserVIAState.ddrb) | (UserVIAState.irb &
+//(~UserVIAState.ddrb))
 //);
 //--								bit = true;
 //--							}
@@ -1960,8 +1962,8 @@ void BeebWin::updateLines(HDC hDC, int starty, int nlines)
     //--		TextStart = m_YWinSize - 20;
     //--
     //--		StretchBlt(hDC, 0, 0, m_XWinSize, win_nlines,
-    //--			m_hDCBitmap, 0, starty, (TeletextEnabled)?552:ActualScreenWidth, (TeletextEnabled==1)?TTLines:nlines,
-    //SRCCOPY);
+    //--			m_hDCBitmap, 0, starty, (TeletextEnabled)?552:ActualScreenWidth,
+    //(TeletextEnabled==1)?TTLines:nlines, SRCCOPY);
     //--
     //--		if ((DisplayCycles>0) && (hFDCBoard!=NULL))
     //--		{
@@ -2073,8 +2075,8 @@ void BeebWin::updateLines(HDC hDC, int starty, int nlines)
     //--			m_AviFrameSkipCount = 0;
     //--
     //--			StretchBlt(m_AviDC, 0, 0, m_Avibmi.bmiHeader.biWidth, m_Avibmi.bmiHeader.biHeight,
-    //--				m_hDCBitmap, 0, starty, (TeletextEnabled)?552:ActualScreenWidth, (TeletextEnabled==1)?TTLines:nlines,
-    //SRCCOPY);
+    //--				m_hDCBitmap, 0, starty, (TeletextEnabled)?552:ActualScreenWidth,
+    //(TeletextEnabled==1)?TTLines:nlines, SRCCOPY);
     //--
     //--			HRESULT hr = aviWriter->WriteVideo((BYTE*)m_AviScreen);
     //--			if (hr != E_UNEXPECTED && FAILED(hr))
@@ -3475,7 +3477,7 @@ void BeebWin::LoadPreferences()
     //--	}
     //--	else {
     //--		m_DDFullScreenMode = GetPrivateProfileInt(CFG_VIEW_SECTION, "DDFullScreenMode", ID_VIEW_DD_640X480,
-    //CFG_FILE_NAME);
+    // CFG_FILE_NAME);
     //--	}
     //++
     m_DDFullScreenMode = ID_VIEW_DD_640X480;
@@ -3803,12 +3805,12 @@ void BeebWin::LoadPreferences()
     //--		m_DisableKeysBreak=0;
     //--	}
     //--
-    //RegRes=SysReg.GetBinaryValue(HKEY_CURRENT_USER,CFG_REG_KEY,"DisableKeysEscape",&m_DisableKeysEscape,binsize);
+    // RegRes=SysReg.GetBinaryValue(HKEY_CURRENT_USER,CFG_REG_KEY,"DisableKeysEscape",&m_DisableKeysEscape,binsize);
     //--	if (!RegRes) {
     //--		m_DisableKeysEscape=0;
     //--	}
     //--
-    //RegRes=SysReg.GetBinaryValue(HKEY_CURRENT_USER,CFG_REG_KEY,"DisableKeysShortcut",&m_DisableKeysShortcut,binsize);
+    // RegRes=SysReg.GetBinaryValue(HKEY_CURRENT_USER,CFG_REG_KEY,"DisableKeysShortcut",&m_DisableKeysShortcut,binsize);
     //--	if (!RegRes) {
     //--		m_DisableKeysShortcut=0;
     //--	}
@@ -5995,7 +5997,7 @@ void BeebWin::LoadFDC(char *DLLName, bool save)
         //--		hFDCBoard=LoadLibrary(DLLName);
         //--		if (hFDCBoard==NULL) {
         //--			MessageBox(GETHWND,"Unable to load FDD Extension Board DLL\nReverting to native
-        //8271\n",WindowTitle,MB_OK|MB_ICONERROR);
+        // 8271\n",WindowTitle,MB_OK|MB_ICONERROR);
         //--			strcpy(DLLName, "None");
         //--		}
         //--		else {
@@ -6004,7 +6006,7 @@ void BeebWin::LoadFDC(char *DLLName, bool save)
         //--			PGetDriveControl=(lGetDriveControl) GetProcAddress(hFDCBoard,"GetDriveControl");
         //--			if ((PGetBoardProperties==NULL) || (PSetDriveControl==NULL) || (PGetDriveControl==NULL)) {
         //--				MessageBox(GETHWND,"Invalid FDD Extension Board DLL\nReverting to native
-        //8271\n",WindowTitle,MB_OK|MB_ICONERROR);
+        // 8271\n",WindowTitle,MB_OK|MB_ICONERROR);
         //--				strcpy(DLLName, "None");
         //--			}
         //--			else {
@@ -6209,7 +6211,7 @@ void BeebWin::CaptureVideo()
     //--
     //--			HRESULT hr = aviWriter->Initialise(FileName, wfp, &m_Avibmi,
     //--							(int)(m_FramesPerSecond > 46 ? 50 : m_FramesPerSecond) / (m_AviFrameSkip+1),
-    //m_hWnd);
+    // m_hWnd);
     //--			if (FAILED(hr))
     //--			{
     //--				MessageBox(m_hWnd, "Failed to create AVI file",

@@ -463,8 +463,8 @@ void Serial_Poll(void)
         }
         else // Playing or stopped
         {
-            //			if (trace == 1) WriteLog("In Serial Poll - Cass_Relay = %d, UEFOpen = %d, TapeClock = %d, OldClock =
-            //%d\n", Cass_Relay, UEFOpen, TapeClock, OldClock);
+            //			if (trace == 1) WriteLog("In Serial Poll - Cass_Relay = %d, UEFOpen = %d, TapeClock = %d, OldClock
+            //= %d\n", Cass_Relay, UEFOpen, TapeClock, OldClock);
 
             /*
              * 10/09/06
@@ -679,10 +679,10 @@ void StatThread(void *lpParam)
             //--				if (dwCommEvent & EV_CTS) {
             //--					// CTS line change
             //--					GetCommModemStatus(hSerialPort,&LineStat);
-            //--					if (LineStat & MS_CTS_ON) ResetACIAStatus(3); else SetACIAStatus(3); // Invert for CTS
-            //bit
-            //--					if (LineStat & MS_CTS_ON) SetACIAStatus(1); else ResetACIAStatus(1); // Keep for TDRE
-            //bit
+            //--					if (LineStat & MS_CTS_ON) ResetACIAStatus(3); else SetACIAStatus(3); // Invert for
+            //CTS bit
+            //--					if (LineStat & MS_CTS_ON) SetACIAStatus(1); else ResetACIAStatus(1); // Keep for
+            //TDRE bit
             //--				}
             //--			}
             //--			bWaitingForStat=FALSE;
@@ -760,7 +760,7 @@ void InitSerialPort(void)
         if (SerialPort == 4)
             pnSerialPort = "Com4";
         //--
-        //hSerialPort=CreateFile(pnSerialPort,GENERIC_READ|GENERIC_WRITE,0,0,OPEN_EXISTING,FILE_FLAG_OVERLAPPED,0);
+        // hSerialPort=CreateFile(pnSerialPort,GENERIC_READ|GENERIC_WRITE,0,0,OPEN_EXISTING,FILE_FLAG_OVERLAPPED,0);
         //--		if (hSerialPort==INVALID_HANDLE_VALUE) {
         MessageBox(GETHWND, "Could not open specified serial port", "BBC Emulator", MB_OK | MB_ICONERROR);
         //--		}

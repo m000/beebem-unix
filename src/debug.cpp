@@ -8,10 +8,10 @@
 #include <config.h>
 #endif
 
-#include "debug.h"
 #include "6502core.h"
 #include "beebemrc.h"
 #include "beebmem.h"
+#include "debug.h"
 #include "main.h"
 #include "tube.h"
 #include "windows.h"
@@ -2037,7 +2037,7 @@ void DebugDisplayInfo(const char *info)
 //--
 //--				case IDC_DEBUGPARASITE:
 //--					DebugParasite = (SendDlgItemMessage(hwndDebug, IDC_DEBUGPARASITE, BM_GETCHECK, 0, 0) ==
-//BST_CHECKED);
+// BST_CHECKED);
 //--					break;
 //--
 //--				case IDCANCEL:
@@ -2348,7 +2348,7 @@ void DebugExecuteCommand()
     //--						{
     //--							if (i != BPCount - 1)
     //--								memmove(&Breakpoints[i], &Breakpoints[i+1], sizeof(Breakpoint) * (BPCount - i -
-    //1));
+    // 1));
     //--							BPCount--;
     //--							i = BPCount;
     //--						}

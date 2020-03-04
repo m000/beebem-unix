@@ -16,10 +16,10 @@ Offset  Description                 Access
 #include <config.h>
 #endif
 
-#include "sasi.h"
 #include "6502core.h"
 #include "beebmem.h"
 #include "main.h"
+#include "sasi.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -129,7 +129,7 @@ void SASIWrite(int Address, int Value)
         return;
 
     //	fprintf(stderr, "SASIWrite Address = 0x%02x, Value = 0x%02x, Phase = %d, PC = 0x%04x\n", Address, Value,
-    //sasi.phase, ProgramCounter);
+    // sasi.phase, ProgramCounter);
 
     switch (Address)
     {
@@ -188,7 +188,7 @@ int SASIRead(int Address)
     }
 
     //	fprintf(stderr, "SASIRead Address = 0x%02x, Value = 0x%02x, Phase = %d, PC = 0x%04x\n", Address, data,
-    //sasi.phase, ProgramCounter);
+    // sasi.phase, ProgramCounter);
 
     return data;
 }
@@ -386,8 +386,8 @@ void SASIExecute(void)
     sasi.phase = execute;
 
     //	fprintf(stderr, "Execute 0x%02x, Param 1=0x%02x, Param 2=0x%02x, Param 3=0x%02x, Param 4=0x%02x, Param 5=0x%02x,
-    //Phase = %d, PC = 0x%04x\n", 			sasi.cmd[0], sasi.cmd[1], sasi.cmd[2], sasi.cmd[3], sasi.cmd[4], sasi.cmd[5],
-    //sasi.phase, ProgramCounter);
+    // Phase = %d, PC = 0x%04x\n", 			sasi.cmd[0], sasi.cmd[1], sasi.cmd[2], sasi.cmd[3], sasi.cmd[4],
+    // sasi.cmd[5], sasi.phase, ProgramCounter);
 
     sasi.lun = (sasi.cmd[1]) >> 5;
 

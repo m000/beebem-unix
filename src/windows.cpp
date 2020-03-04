@@ -2,10 +2,10 @@
 #include <config.h>
 #endif
 
-#include "windows.h"
 #include "beebem_pages.h"
 #include "fake_registry.h"
 #include "log.h"
+#include "windows.h"
 
 #include "gui/gui.h"
 

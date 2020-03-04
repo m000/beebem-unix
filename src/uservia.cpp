@@ -931,22 +931,22 @@ void ShowOutputs(unsigned char data)
     //--		if (data != last_data)
     //--		{
     //--			changed_bits = data ^ last_data;
-    //--			if (changed_bits & 0x80) { if ((UserVIAState.ddrb & 0x80) == 0x80) SetValue(IDC_OB7, (data & 0x80) != 0);
-    //else SetValue(IDC_OB7, 0); }
-    //--			if (changed_bits & 0x40) { if ((UserVIAState.ddrb & 0x40) == 0x40) SetValue(IDC_OB6, (data & 0x40) != 0);
-    //else SetValue(IDC_OB6, 0); }
-    //--			if (changed_bits & 0x20) { if ((UserVIAState.ddrb & 0x20) == 0x20) SetValue(IDC_OB5, (data & 0x20) != 0);
-    //else SetValue(IDC_OB5, 0); }
-    //--			if (changed_bits & 0x10) { if ((UserVIAState.ddrb & 0x10) == 0x10) SetValue(IDC_OB4, (data & 0x10) != 0);
-    //else SetValue(IDC_OB4, 0); }
-    //--			if (changed_bits & 0x08) { if ((UserVIAState.ddrb & 0x08) == 0x08) SetValue(IDC_OB3, (data & 0x08) != 0);
-    //else SetValue(IDC_OB3, 0); }
-    //--			if (changed_bits & 0x04) { if ((UserVIAState.ddrb & 0x04) == 0x04) SetValue(IDC_OB2, (data & 0x04) != 0);
-    //else SetValue(IDC_OB2, 0); }
-    //--			if (changed_bits & 0x02) { if ((UserVIAState.ddrb & 0x02) == 0x02) SetValue(IDC_OB1, (data & 0x02) != 0);
-    //else SetValue(IDC_OB1, 0); }
-    //--			if (changed_bits & 0x01) { if ((UserVIAState.ddrb & 0x01) == 0x01) SetValue(IDC_OB0, (data & 0x01) != 0);
-    //else SetValue(IDC_OB0, 0); }
+    //--			if (changed_bits & 0x80) { if ((UserVIAState.ddrb & 0x80) == 0x80) SetValue(IDC_OB7, (data & 0x80) !=
+    //0); else SetValue(IDC_OB7, 0); }
+    //--			if (changed_bits & 0x40) { if ((UserVIAState.ddrb & 0x40) == 0x40) SetValue(IDC_OB6, (data & 0x40) !=
+    //0); else SetValue(IDC_OB6, 0); }
+    //--			if (changed_bits & 0x20) { if ((UserVIAState.ddrb & 0x20) == 0x20) SetValue(IDC_OB5, (data & 0x20) !=
+    //0); else SetValue(IDC_OB5, 0); }
+    //--			if (changed_bits & 0x10) { if ((UserVIAState.ddrb & 0x10) == 0x10) SetValue(IDC_OB4, (data & 0x10) !=
+    //0); else SetValue(IDC_OB4, 0); }
+    //--			if (changed_bits & 0x08) { if ((UserVIAState.ddrb & 0x08) == 0x08) SetValue(IDC_OB3, (data & 0x08) !=
+    //0); else SetValue(IDC_OB3, 0); }
+    //--			if (changed_bits & 0x04) { if ((UserVIAState.ddrb & 0x04) == 0x04) SetValue(IDC_OB2, (data & 0x04) !=
+    //0); else SetValue(IDC_OB2, 0); }
+    //--			if (changed_bits & 0x02) { if ((UserVIAState.ddrb & 0x02) == 0x02) SetValue(IDC_OB1, (data & 0x02) !=
+    //0); else SetValue(IDC_OB1, 0); }
+    //--			if (changed_bits & 0x01) { if ((UserVIAState.ddrb & 0x01) == 0x01) SetValue(IDC_OB0, (data & 0x01) !=
+    //0); else SetValue(IDC_OB0, 0); }
     //--			last_data = data;
     //--		}
     //--	}
@@ -962,22 +962,22 @@ void ShowInputs(unsigned char data)
     //--		if (data != last_data)
     //--		{
     //--			changed_bits = data ^ last_data;
-    //--			if (changed_bits & 0x80) { if ((UserVIAState.ddrb & 0x80) == 0x00) SetValue(IDC_IB7, (data & 0x80) == 0);
-    //else SetValue(IDC_IB7, 0); }
-    //--			if (changed_bits & 0x40) { if ((UserVIAState.ddrb & 0x40) == 0x00) SetValue(IDC_IB6, (data & 0x40) == 0);
-    //else SetValue(IDC_IB6, 0); }
-    //--			if (changed_bits & 0x20) { if ((UserVIAState.ddrb & 0x20) == 0x00) SetValue(IDC_IB5, (data & 0x20) == 0);
-    //else SetValue(IDC_IB5, 0); }
-    //--			if (changed_bits & 0x10) { if ((UserVIAState.ddrb & 0x10) == 0x00) SetValue(IDC_IB4, (data & 0x10) == 0);
-    //else SetValue(IDC_IB4, 0); }
-    //--			if (changed_bits & 0x08) { if ((UserVIAState.ddrb & 0x08) == 0x00) SetValue(IDC_IB3, (data & 0x08) == 0);
-    //else SetValue(IDC_IB3, 0); }
-    //--			if (changed_bits & 0x04) { if ((UserVIAState.ddrb & 0x04) == 0x00) SetValue(IDC_IB2, (data & 0x04) == 0);
-    //else SetValue(IDC_IB2, 0); }
-    //--			if (changed_bits & 0x02) { if ((UserVIAState.ddrb & 0x02) == 0x00) SetValue(IDC_IB1, (data & 0x02) == 0);
-    //else SetValue(IDC_IB1, 0); }
-    //--			if (changed_bits & 0x01) { if ((UserVIAState.ddrb & 0x01) == 0x00) SetValue(IDC_IB0, (data & 0x01) == 0);
-    //else SetValue(IDC_IB0, 0); }
+    //--			if (changed_bits & 0x80) { if ((UserVIAState.ddrb & 0x80) == 0x00) SetValue(IDC_IB7, (data & 0x80) ==
+    //0); else SetValue(IDC_IB7, 0); }
+    //--			if (changed_bits & 0x40) { if ((UserVIAState.ddrb & 0x40) == 0x00) SetValue(IDC_IB6, (data & 0x40) ==
+    //0); else SetValue(IDC_IB6, 0); }
+    //--			if (changed_bits & 0x20) { if ((UserVIAState.ddrb & 0x20) == 0x00) SetValue(IDC_IB5, (data & 0x20) ==
+    //0); else SetValue(IDC_IB5, 0); }
+    //--			if (changed_bits & 0x10) { if ((UserVIAState.ddrb & 0x10) == 0x00) SetValue(IDC_IB4, (data & 0x10) ==
+    //0); else SetValue(IDC_IB4, 0); }
+    //--			if (changed_bits & 0x08) { if ((UserVIAState.ddrb & 0x08) == 0x00) SetValue(IDC_IB3, (data & 0x08) ==
+    //0); else SetValue(IDC_IB3, 0); }
+    //--			if (changed_bits & 0x04) { if ((UserVIAState.ddrb & 0x04) == 0x00) SetValue(IDC_IB2, (data & 0x04) ==
+    //0); else SetValue(IDC_IB2, 0); }
+    //--			if (changed_bits & 0x02) { if ((UserVIAState.ddrb & 0x02) == 0x00) SetValue(IDC_IB1, (data & 0x02) ==
+    //0); else SetValue(IDC_IB1, 0); }
+    //--			if (changed_bits & 0x01) { if ((UserVIAState.ddrb & 0x01) == 0x00) SetValue(IDC_IB0, (data & 0x01) ==
+    //0); else SetValue(IDC_IB0, 0); }
     //--			last_data = data;
     //--		}
     //--	}

@@ -15,10 +15,10 @@
  */
 #ifdef WITH_ECONET
 
-#include "econet.h"
 #include "6502core.h"
 #include "beebwin.h"
 #include "debug.h"
+#include "econet.h"
 #include "main.h"
 #include "sysvia.h"
 #include "windows.h"
@@ -285,7 +285,7 @@ void EconetReset(void)
             service.sin_port = htons(EconetListenPort);
             //->			if (bind(ListenSocket, (SOCKADDR*)&service, sizeof(service)) == SOCKET_ERROR) {
             //--				sprintf(info, "Econet: Failed to bind to port %d (error %ld)", EconetListenPort,
-            //WSAGetLastError());
+            // WSAGetLastError());
             //--				EconetError(info);
             //--				closesocket(ListenSocket);
             //--				WSACleanup();
@@ -565,7 +565,7 @@ unsigned char ReadEconetRegister(unsigned char Register)
     if (Register > 1)
     {
         if (((ADLC.control1 & 64) == 0) && ADLC.rxfptr)
-        {   // rxreset not set and someting in fifo
+        { // rxreset not set and someting in fifo
             //->			if (DebugEnabled) {
             //--				char info[200];
             //--				sprintf(info, "Econet: Returned fifo: %02X", (int)ADLC.rxfifo[ADLC.rxfptr-1]);
@@ -811,7 +811,7 @@ bool EconetPoll_real(void)
     // CR4b3,4 - RX word length. 11=8 bits. BBC uses 8 bits so ignore flags and assume 8 bits throughout
     // CR4b5 - TransmitABT - Abort Transmission.  Once abort starts, bit is cleared.
     if (ADLC.control4 & 32)
-    {   // ABORT
+    { // ABORT
         //->		if (DebugEnabled) DebugDisplayTrace(DEBUG_ECONET, true, "EconetPoll: TxABORT is set\0");
         //++
         qDEBUG("Econet poll: TxABORT is set.");
@@ -840,7 +840,7 @@ bool EconetPoll_real(void)
         if (!(ADLC.control1 & 128))
         { // tx reset off
             if (ADLC.txfptr)
-            {   // there is data is in tx fifo
+            { // there is data is in tx fifo
                 //->				if (DebugEnabled)
                 //--					DebugDisplayTrace(DEBUG_ECONET, true, "EconetPoll: Write to FIFO noticed");
                 //++
@@ -869,7 +869,7 @@ bool EconetPoll_real(void)
                     EconetTxWritePointer++;
                 }
                 if (TXlast)
-                {   // TxLast set
+                { // TxLast set
                     //->					if (DebugEnabled) {
                     //--						sprintf(info, "Econet: TXLast set - Send packet to %02x %02x ",
                     //--								(unsigned int)(Econettxbuff[1]), (unsigned int)Econettxbuff[0]);
@@ -894,19 +894,20 @@ bool EconetPoll_real(void)
 
                             // Send a datagram to the receiver
                             //->							if (DebugEnabled) {
-                            //--								sprintf(info, "Econet: TXLast set - Send %d byte packet to %02x %02x
+                            //--								sprintf(info, "Econet: TXLast set - Send %d byte packet to %02x
+                            //%02x
                             //(%08X :%u)",
                             //--										EconetTxWritePointer,
                             //--										(unsigned int)(Econettxbuff[1]), (unsigned
-                            //int)Econettxbuff[0],
+                            // int)Econettxbuff[0],
                             //--										(unsigned int)network[i].inet_addr, (unsigned
-                            //int)network[i].port);
+                            // int)network[i].port);
                             //--								DebugDisplayTrace(DEBUG_ECONET, true, info);
                             //--								sprintf(info, "Econet: Packet data:");
                             //--								for (unsigned int i = 0; i < EconetTxWritePointer; ++i)
                             //{
                             //--									sprintf(info+strlen(info), " %02X",
-                            //Econettxbuff[i]);
+                            // Econettxbuff[i]);
                             //--								}
                             //--								DebugDisplayTrace(DEBUG_ECONET, true, info);
                             //--							}
@@ -926,15 +927,17 @@ bool EconetPoll_real(void)
                             //<-
 
                             //->							if (sendto(SendSocket, (char *)Econettxbuff,
-                            //EconetTxWritePointer,
-                            //--								   0, (SOCKADDR *) &RecvAddr, sizeof(RecvAddr)) == SOCKET_ERROR)
+                            // EconetTxWritePointer,
+                            //--								   0, (SOCKADDR *) &RecvAddr, sizeof(RecvAddr)) ==
+                            //SOCKET_ERROR)
                             //{
-                            //--								sprintf(info, "Econet: Failed to send packet to %02x %02x (%08X
+                            //--								sprintf(info, "Econet: Failed to send packet to %02x %02x
+                            //(%08X
                             //:%u)",
                             //--									(unsigned int)(Econettxbuff[1]), (unsigned
-                            //int)Econettxbuff[0],
+                            // int)Econettxbuff[0],
                             //--									(unsigned int)network[i].inet_addr, (unsigned
-                            //int)network[i].port);
+                            // int)network[i].port);
                             //--								EconetError(info);
                             //--							}
                             //++
@@ -958,7 +961,7 @@ bool EconetPoll_real(void)
                     FlagFillActive = true;
                     SetTrigger(EconetFlagFillTimeout, EconetFlagFillTimeoutTrigger);
                     //->					if (DebugEnabled) DebugDisplayTrace(DEBUG_ECONET, true, "Econet: FlagFill
-                    //set");
+                    // set");
                     //++
                     qDEBUG("FlagFill set.");
                     //<-
@@ -982,7 +985,7 @@ bool EconetPoll_real(void)
             {
                 // something waiting to be given to the processor
                 if (ADLC.rxfptr < 3)
-                {   // space in fifo
+                { // space in fifo
                     //->					if (DebugEnabled) DebugDisplayTrace(DEBUG_ECONET, true,
                     //--										  "EconetPoll: Time to give another byte to the beeb");
                     //++
@@ -1034,7 +1037,7 @@ bool EconetPoll_real(void)
                             //--								sprintf (info, "EconetPoll: Packet data:");
                             //--								for (int i = 0; i < RetVal; ++i) {
                             //--									sprintf(info+strlen(info), " %02X",
-                            //Econetrxbuff[i]);
+                            // Econetrxbuff[i]);
                             //--								}
                             //--								DebugDisplayTrace(DEBUG_ECONET, true, info);
                             //--							}
@@ -1055,7 +1058,7 @@ bool EconetPoll_real(void)
                                 // Peer sent us packet - no longer in flag fill
                                 FlagFillActive = false;
                                 //--								if (DebugEnabled) DebugDisplayTrace(DEBUG_ECONET,
-                                //true,
+                                // true,
                                 //--													"Econet: FlagFill reset");
                             }
                             else
@@ -1064,9 +1067,9 @@ bool EconetPoll_real(void)
                                 FlagFillActive = true;
                                 SetTrigger(EconetFlagFillTimeout, EconetFlagFillTimeoutTrigger);
                                 //--								if (DebugEnabled) DebugDisplayTrace(DEBUG_ECONET,
-                                //true,
-                                //--													"Econet: FlagFill set - other station
-                                //comms");
+                                // true,
+                                //--													"Econet: FlagFill set - other
+                                //station comms");
                                 //+>
                                 qDEBUG("FlagFill set - other station comms");
                                 //<+
@@ -1180,7 +1183,7 @@ bool EconetPoll_real(void)
 
     // SR1b5 - TXU - Tx Underrun.
     if (ADLC.txfptr > 4)
-    {   // probably not needed
+    { // probably not needed
         //->		if (DebugEnabled) {
         //--			sprintf(info, "Econet: TX Underrun - TXfptr %02x", (unsigned int)ADLC.txfptr);
         //--			DebugDisplayTrace(DEBUG_ECONET, true, info);
@@ -1225,7 +1228,7 @@ bool EconetPoll_real(void)
         else
         { // FC mode
             if (!(ADLC.txfptr))
-            {   // nothing in fifo
+            { // nothing in fifo
                 //->				if (DebugEnabled && !(ADLC.status1 & 64))
                 //--					DebugDisplayTrace(DEBUG_ECONET, true, "set fc");
                 //++
@@ -1410,7 +1413,7 @@ bool EconetPoll_real(void)
                 {
                     interruptnow = TRUE;
                     //->					DebugDisplayTrace(DEBUG_ECONET, true, "ADLC: S1 flags still set,
-                    //interrupt");
+                    // interrupt");
                     //++
                     qDEBUG("ADLC: S1 flags still set, interrupt");
                     //<-

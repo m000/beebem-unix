@@ -30,8 +30,8 @@ char *perl_params = "combine=0,"
                     "dfd_inline=1,"
                     "ed_inline=1";
 
-#include "z80.h"
 #include "main.h"
+#include "z80.h"
 #include "z80mem.h"
 
 /* Z80 registers */

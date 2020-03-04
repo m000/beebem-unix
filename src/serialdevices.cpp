@@ -197,7 +197,7 @@ void TouchScreenReadScreen(bool check)
     {
 
         //		WriteLog("JoystickX = %d, JoystickY = %d, last_x = %d, last_y = %d\n", JoystickX, JoystickY, last_x,
-        //last_y);
+        // last_y);
 
         if (AMXButtons & AMX_LEFT_BUTTON)
         {

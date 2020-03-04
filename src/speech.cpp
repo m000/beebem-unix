@@ -259,7 +259,7 @@ void my_load_address(int data)
     tms5220->chip->phrom_address &= 0x0ffff;
     tms5220->chip->phrom_address |= (data << 16);
     //	fprintf(stderr, "In my_load_address with data = 0x%02x, new address = 0x%05x\n", data,
-    //tms5220->chip->phrom_address);
+    // tms5220->chip->phrom_address);
 }
 
 void my_read_and_branch(void)

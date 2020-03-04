@@ -479,7 +479,7 @@ int SysVIARead(int Address)
     switch (Address)
     {
     case 0: /* IRB read */
-            // Clear bit 4 of IFR from ATOD Conversion
+        // Clear bit 4 of IFR from ATOD Conversion
         SysVIAState.ifr &= ~16;
         tmp = SysVIAState.orb & SysVIAState.ddrb;
         tmp |= 32; /* Fire button 2 released */

@@ -27,9 +27,9 @@ can be determined under normal use".
 #include <config.h>
 #endif
 
-#include "disc1770.h"
 #include "6502core.h"
 #include "beebemrc.h"
+#include "disc1770.h"
 #include "main.h"
 #include "uefstate.h"
 #include "windows.h"
@@ -633,8 +633,9 @@ void Poll1770(int NCycles)
     //			dByteCount--;
     //			if (dByteCount==0) RotSect++; if (RotSect>MaxSects[CurrentDrive]) RotSect=0;
     //			if ((dByteCount==0) && (!MultiSect)) { ResetStatus(0); NMIStatus|=1<<nmi_floppy;
-    //fseek(CurrentDisc,HeadPos[CurrentDrive],SEEK_SET); FDCommand=10; } // End of sector 			if ((dByteCount==0) &&
-    //(MultiSect)) { dByteCount=257; Sector++; 				if (Sector==MaxSects[CurrentDrive]) { MultiSect=0; /* Sector=0; */ }
+    // fseek(CurrentDisc,HeadPos[CurrentDrive],SEEK_SET); FDCommand=10; } // End of sector 			if ((dByteCount==0)
+    // && (MultiSect)) { dByteCount=257; Sector++; 				if (Sector==MaxSects[CurrentDrive]) { MultiSect=0; /*
+    //Sector=0; */ }
     //			}
     //			LoadingCycles=BYTE_TIME; // Slow down the read a bit :)
     //		}
