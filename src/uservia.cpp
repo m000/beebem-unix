@@ -866,12 +866,14 @@ char *BitKeyName( int Key )
 //--		return Character;
 //--	}
 //--
+    return NULL;
 }
 
 int GetValue(int ctrlID)
 
 {
 //--	return (SendDlgItemMessage(hwndBreakOut, ctrlID, BM_GETCHECK, 0, 0) == BST_CHECKED);
+    return 0;
 }
 
 void SetValue(int ctrlID, int State)

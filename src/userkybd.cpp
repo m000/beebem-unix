@@ -62,9 +62,9 @@ LPSTR	KeyName( UINT Key );
 
 
 // Colour used to highlight the selected key.
-//--static COLORREF Highlight	= 0x00FF0080;	// Purple.
-//--static COLORREF FunctionKey = 0x000000FF;	// Red
-//--static COLORREF NormalKey	= 0x00000000;	// Black
+static COLORREF Highlight	= 0x00FF0080;	// Purple.
+static COLORREF FunctionKey = 0x000000FF;	// Red
+static COLORREF NormalKey	= 0x00000000;	// Black
 
 
 //--COLORREF OldColour;		// Holds bkCOlor of non-highlighted key.
@@ -180,6 +180,7 @@ BOOL UserKeyboardDialog( HWND      hwndParent )
 //--
 //--    return fResult;
 //--
+	return true;
 }   // UserKeyboardDialog
 /****************************************************************************/
 
@@ -417,6 +418,7 @@ COLORREF GetKeyColour( UINT ctrlID )
 //--	default:
 //--		return NormalKey;
 //--	}
+	return NormalKey;
 } // GetKeyColour
 
 /****************************************************************************/
@@ -512,6 +514,7 @@ HWND PromptForInput( HWND hwndParent, UINT ctrlID )
 //--		ShowWindow( Success, SW_SHOW );
 //--	
 //--	return Success;
+	return 0;
 }
 
 /****************************************************************************/
@@ -620,10 +623,10 @@ void GetKeysUsed( LPSTR Keys )
 
 LPSTR KeyName( UINT Key )
 {
-//--	static CHAR Character[2]; // Used to return single characters.
-//--
-//--	switch( Key )
-//--	{
+	static CHAR Character[2]; // Used to return single characters.
+
+	switch( Key )
+	{
 //--	case   8: return "Backspace";
 //--	case   9: return "Tab";
 //--	case  13: return "Enter";
@@ -686,12 +689,11 @@ LPSTR KeyName( UINT Key )
 //--	case 222: return "#";
 //--	case 223: return "`";
 //--
-//--	default:
-//--		Character[0] = (CHAR) LOBYTE( Key );
-//--		Character[1] = '\0';
-//--		return Character;
-//--	}
-//--
+	default:
+		Character[0] = (CHAR) LOBYTE( Key );
+		Character[1] = '\0';
+		return Character;
+	}
 }
 
 /****************************************************************************/
