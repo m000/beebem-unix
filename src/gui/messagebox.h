@@ -20,7 +20,7 @@
 
 //#include "include/gui.h"
 
-#include "gui/types.h"
+#include "../types.h"
 
 #include "gui/box.h"
 #include "gui/button.h"

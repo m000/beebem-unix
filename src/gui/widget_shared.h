@@ -20,7 +20,7 @@
 #endif
 
 #include "../log.h"
-#include "gui/types.h"
+#include "../types.h"
 
 #include <SDL.h>
 
