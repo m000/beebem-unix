@@ -19,58 +19,27 @@
 /****************************************************************************/
 /* Mike Wyatt and NRM's port to win32 - 7/6/97 */
 
-#include <fstream>
-#include <iostream>
-#include <signal.h>
-#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-#ifdef WITH_UNIX_EXTRAS
-#include <dirent.h>
-#include <pwd.h>
-#include <sys/types.h>
-#endif
-
 #include <SDL.h>
 
-#include "windows.h"
-
 #include "6502core.h"
-#include "atodconv.h"
-#include "beebmem.h"
-#include "beebsound.h"
+#include "beebem_pages.h"
 #include "beebwin.h"
 #include "disc1770.h"
 #include "disc8271.h"
-#include "econet.h" //Rob
-#include "serial.h"
-#include "sysvia.h"
-#include "tube.h"
-#include "uservia.h"
-#include "via.h"
-#include "video.h"
-
+#include "fake_registry.h"
+#include "gui/gui.h"
+#include "log.h"
 #include "sasi.h"
 #include "scsi.h" // Dave: Needed for reset on break
-
-#include "i86.h"
+#include "sysvia.h"
 #include "teletext.h"
-#include "z80.h"
-#include "z80mem.h"
-
-#include "unix/beebsdl_new.h"
+#include "tube.h"
 #include "unix/beebsdl.h"
-#include "unix/line.h" // SDL Stuff
-#include "log.h"
-
-#include "gui/gui.h"
-
-#include "beebem_pages.h"
-#include "fake_registry.h"
-
-// Can remove this (only needed to calc string hash)
-//#include "gui_functions.h"
+#include "unix/beebsdl_new.h"
+#include "uservia.h"
+#include "z80.h"
 
 #ifdef MULTITHREAD
 #undef MULTITHREAD
