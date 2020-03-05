@@ -17,12 +17,11 @@
 #ifndef _DW_TABGROUP_PRIVATE_H_
 #define _DW_TABGROUP_PRIVATE_H_
 
-#include "../types.h"
+#include <SDL.h>
 
+#include "../unix/types.h"
 #include "gui/widget.h"
 #include "gui/window.h"
-
-#include <SDL.h>
 
 /*
 #ifdef EG_DEBUG

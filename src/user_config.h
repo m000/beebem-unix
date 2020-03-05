@@ -1,7 +1,7 @@
 #ifndef _USER_CONFIG_H_
 #define _USER_CONFIG_H_
 
-#include "types.h"
+#include "unix/types.h"
 #include "windows.h"
 
 #ifdef __cplusplus

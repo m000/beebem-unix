@@ -10,14 +10,12 @@
 #ifndef _DW_TICKBOX_PRIVATE_H_
 #define _DW_TICKBOX_PRIVATE_H_
 
-#include "../types.h"
+#include <SDL.h>
 
+#include "../unix/types.h"
+#include "gui/tickbox.h"
 #include "gui/widget.h"
 #include "gui/window.h"
-
-#include "gui/tickbox.h"
-
-#include <SDL.h>
 
 /* Get EG_TickBox struct.
  */

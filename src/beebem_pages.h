@@ -1,7 +1,5 @@
-//#include "include/gui.h"
-
 #include <SDL.h>
-#include "types.h"
+#include "unix/types.h"
 
 #ifdef __cplusplus
 extern "C"

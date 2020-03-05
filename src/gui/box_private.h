@@ -10,18 +10,15 @@
 #ifndef _DW_BOX_PRIVATE_H_
 #define _DW_BOX_PRIVATE_H_
 
-#include "../types.h"
-
 #include <SDL.h>
 
+#include "../unix/types.h"
+#include "gui/box.h"
 #include "gui/widget.h"
 #include "gui/window.h"
 
-#include "gui/box.h"
-
 /* Get EG_Box struct.
  */
-
 #define EG_BOX_GET_STRUCT_PTR(w, v, r)                                                                                 \
     if (w == NULL)                                                                                                     \
     {                                                                                                                  \

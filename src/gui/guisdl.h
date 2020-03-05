@@ -3,7 +3,7 @@
 
 #include <SDL.h>
 
-#include "../types.h"
+#include "../unix/types.h"
 
 #define EG_Draw_Border_Normal 0
 #define EG_Draw_Border_BoxHigh 1

@@ -19,6 +19,9 @@ file(GLOB beebem_src
     "src/*.h"
     "src/*.c"
     "src/*.cpp"
+    "src/unix/*.h"
+    "src/unix/*.c"
+    "src/unix/*.cpp"
     "src/gui/*.h"
     "src/gui/*.c"
 )

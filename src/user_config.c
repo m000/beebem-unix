@@ -26,17 +26,10 @@
  *      ---
  */
 
-#include "beebem.h"
-#include "beebsdl.h"
-#include "gui/gui.h"
-#include "user_config.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-/* Extra UNIX specific includes:
- */
 #ifdef WITH_UNIX_EXTRAS
 #include <dirent.h>
 #include <errno.h>
@@ -45,6 +38,11 @@
 #include <sys/types.h>
 #include <unistd.h>
 #endif
+
+#include "beebem.h"
+#include "gui/gui.h"
+#include "unix/beebsdl.h"
+#include "user_config.h"
 
 /* Sub directory (from DATA_DIR) for user configuration directory when not UNIX.
  */

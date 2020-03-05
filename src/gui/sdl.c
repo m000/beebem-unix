@@ -1,9 +1,8 @@
 
-#include "gui/guisdl.h"
-
 #include "../log.h"
-#include "gui/line.h"
-#include "../types.h"
+#include "../unix/line.h"
+#include "../unix/types.h"
+#include "gui/guisdl.h"
 
 static EG_BOOL EG_DrawString_Initialise(void);
 static void EG_DrawString_Free(void);

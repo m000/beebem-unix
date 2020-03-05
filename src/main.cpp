@@ -19,12 +19,12 @@
 /****************************************************************************/
 /* Mike Wyatt and NRM's port to win32 - 7/6/97 */
 
+#include <fstream>
+#include <iostream>
 #include <signal.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-#include <SDL.h>
 
 #ifdef WITH_UNIX_EXTRAS
 #include <dirent.h>
@@ -32,9 +32,9 @@
 #include <sys/types.h>
 #endif
 
+#include <SDL.h>
+
 #include "windows.h"
-#include <fstream>
-#include <iostream>
 
 #include "6502core.h"
 #include "atodconv.h"
@@ -59,8 +59,8 @@
 #include "z80.h"
 #include "z80mem.h"
 
-#include "beebsdl.h"
-#include "line.h" // SDL Stuff
+#include "unix/beebsdl.h"
+#include "unix/line.h" // SDL Stuff
 #include "log.h"
 
 #include "gui/gui.h"
@@ -110,7 +110,6 @@ FILE *tlog;
 //----------------------------------------------
 
 int done = 0;
-/////////////////////////////////int fullscreen = 0;
 int showing_menu = 0;
 EG_Window *displayed_window_ptr = NULL;
 
@@ -139,11 +138,6 @@ int GetFullscreenState(void)
 
 int ToggleFullscreen(void)
 {
-    //	if (fullscreen != 0)
-    //		fullscreen = 0;
-    //	else
-    //		fullscreen = 1;
-
     if (mainWin->IsFullScreen())
         mainWin->SetFullScreenToggle(false);
     else
@@ -195,13 +189,6 @@ void Quit(void)
     done = 1;
 }
 
-//------------------------------------------------
-
-//-- int CALLBACK WinMain(HINSTANCE hInstance,
-//-- 					HINSTANCE hPrevInstance,
-//-- 					LPSTR lpszCmdLine,
-//-- 					int nCmdShow)
-//-- {
 int main(int argc, char *argv[])
 {
     //--	MSG msg;

@@ -1,7 +1,7 @@
 #ifndef _FAKE_REGISTRY_H_
 #define _FAKE_REGISTRY_H_
 
-#include "types.h"
+#include "unix/types.h"
 #include "windows.h"
 
 #ifdef __cplusplus

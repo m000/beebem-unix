@@ -10,9 +10,9 @@
 #ifndef _DW_WINDOW_H_
 #define _DW_WINDOW_H_
 
-#include "../types.h"
 #include <SDL.h>
 
+#include "../unix/types.h"
 #include "gui/widget.h"
 
 /* Should not need this until window is a widget (I suck so much...)

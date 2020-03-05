@@ -4,9 +4,9 @@
 #ifndef _FAKE_MS_WINDOWS_H_
 #define _FAKE_MS_WINDOWS_H_
 
-#include "beebsdl.h"
-#include "log.h"
 #include <SDL.h>
+#include "unix/beebsdl.h"
+#include "log.h"
 
 #include "beebem_pages.h"
 

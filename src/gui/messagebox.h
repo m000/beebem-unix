@@ -16,15 +16,13 @@
 
 //#include "include/gui.h"
 
-#include "../types.h"
-
+#include "../unix/types.h"
 #include "gui/box.h"
 #include "gui/button.h"
 #include "gui/label.h"
 #include "gui/widget.h"
-#include "gui/window.h"
-
 #include "gui/widget_private.h"
+#include "gui/window.h"
 
 #ifdef __cplusplus
 extern "C"

@@ -7,23 +7,18 @@
  *	---
  */
 
+#include <SDL.h>
+
 #include "../log.h"
-#include "../types.h"
-
+#include "../unix/types.h"
 #include "gui/functions.h"
-
 #include "gui/progressbar.h"
 #include "gui/progressbar_private.h"
-
-#include "gui/widget_shared.h"
-
-#include "gui/window.h"
-#include "gui/window_private.h"
-
 #include "gui/widget.h"
 #include "gui/widget_private.h"
-
-#include <SDL.h>
+#include "gui/widget_shared.h"
+#include "gui/window.h"
+#include "gui/window_private.h"
 
 /* Callbacks:
  */

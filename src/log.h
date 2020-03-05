@@ -1,7 +1,7 @@
 #ifndef BEEBEM_LOG_H
 #define BEEBEM_LOG_H
 
-#include "line.h"
+#include "unix/line.h"
 
 #include <stdarg.h>
 #include <stdio.h>

@@ -5,14 +5,11 @@
  *	(See windows.cpp for MFC wrapper and Windows style MessageBox function.)
  */
 
-#include "../log.h"
-
-#include "gui/messagebox.h"
-#include "gui/messagebox_private.h"
-
-#include "gui/functions.h"
-
 #include <SDL.h>
+
+#include "../log.h"
+#include "gui/functions.h"
+#include "gui/messagebox.h"
 
 /* Dimension of message box:
  */

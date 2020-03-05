@@ -10,18 +10,15 @@
 #ifndef _DW_BUTTON_PRIVATE_H_
 #define _DW_BUTTON_PRIVATE_H_
 
-#include "../types.h"
-
 #include <SDL.h>
 
+#include "../unix/types.h"
+#include "gui/button.h"
 #include "gui/widget.h"
 #include "gui/window.h"
 
-#include "gui/button.h"
-
 /* Get EG_Button struct.
  */
-
 #define EG_BUTTON_GET_STRUCT_PTR(w, v, r)                                                                              \
     if (w == NULL)                                                                                                     \
     {                                                                                                                  \

@@ -26,7 +26,7 @@
 #endif
 //#define MULTITHREAD
 
-#include "beebsdl.h"
+#include "unix/beebsdl.h"
 #include "beebwin.h"
 #include "windows.h"
 

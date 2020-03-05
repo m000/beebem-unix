@@ -29,8 +29,8 @@
 #include <string.h>
 
 #include "../log.h"
-#include "gui/line.h"
-#include "../types.h"
+#include "../unix/line.h"
+#include "../unix/types.h"
 
 /* The following three definitions exist because I don't know what pointers
  * on 64 bit machines look like.

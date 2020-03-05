@@ -10,12 +10,11 @@
 #ifndef _DW_TABPAGE_H_
 #define _DW_TABPAGE_H_
 
-#include "../types.h"
+#include <SDL.h>
 
+#include "../unix/types.h"
 #include "gui/widget.h"
 #include "gui/window.h"
-
-#include <SDL.h>
 
 /* Widget type:
  */

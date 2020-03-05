@@ -10,16 +10,14 @@
 #ifndef _DW_PROGRESSBAR_PRIVATE_H_
 #define _DW_PROGRESSBAR_PRIVATE_H_
 
-#include "../types.h"
-
 #include <SDL.h>
 
+#include "../unix/types.h"
 #include "gui/widget.h"
 #include "gui/window.h"
 
 /* Get EG_ProgressBar struct.
  */
-
 #define EG_PROGRESSBAR_GET_STRUCT_PTR(w, v, r)                                                                         \
     if (w == NULL)                                                                                                     \
     {                                                                                                                  \

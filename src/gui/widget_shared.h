@@ -11,20 +11,17 @@
 #ifndef _DW_WIDGET_SHARED_H_
 #define _DW_WIDGET_SHARED_H_
 
+#include <SDL.h>
+
 /* 	Note: Includes window_private.h and widget_private.h so for widget
  * 	implementation headers only.
  */
 
 #include "../log.h"
-#include "../types.h"
-
-#include <SDL.h>
-
+#include "../unix/types.h"
 #include "gui/functions.h"
-
 #include "gui/widget.h"
 #include "gui/widget_private.h"
-
 #include "gui/window.h"
 #include "gui/window_private.h"
 

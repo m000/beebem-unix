@@ -1,11 +1,5 @@
-/*
- */
-
 #ifndef _EG_TYPES_H_
 #define _EG_TYPES_H_
-
-/* START OF types.h ------------------------------------------------------------
- */
 
 /* exit codes:
  */
@@ -35,8 +29,5 @@ typedef int EG_BOOL;
 
 typedef unsigned long EG_StringHash;
 #define EG_AsStringHash(n) ((EG_StringHash)n)
-
-/* END OF types.h --------------------------------------------------------------
- */
 
 #endif

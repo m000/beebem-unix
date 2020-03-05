@@ -10,16 +10,13 @@
 #ifndef _DW_TOGGLEBUTTON_PRIVATE_H_
 #define _DW_TOGGLEBUTTON_PRIVATE_H_
 
-#include "../types.h"
+#include <SDL.h>
 
+#include "../unix/types.h"
+#include "gui/radiogroup.h"
+#include "gui/togglebutton.h"
 #include "gui/widget.h"
 #include "gui/window.h"
-
-#include "gui/radiogroup.h"
-
-#include "gui/togglebutton.h"
-
-#include <SDL.h>
 
 /* Get EG_ToggleButton struct.
  */

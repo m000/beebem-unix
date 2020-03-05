@@ -10,9 +10,9 @@
 #ifndef _DW_WINDOW_PRIVATE_H_
 #define _DW_WINDOW_PRIVATE_H_
 
-#include "../types.h"
 #include <SDL.h>
 
+#include "../unix/types.h"
 #include "gui/widget.h"
 #include "gui/window.h"
 

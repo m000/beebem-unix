@@ -10,9 +10,9 @@
 #ifndef _DW_WIDGET_PRIVATE_H_
 #define _DW_WIDGET_PRIVATE_H_
 
-#include "../types.h"
 #include <SDL.h>
 
+#include "../unix/types.h"
 #include "gui/widget.h"
 
 /* Convenient macro to check for more obvious EG_Widget struct pointer errors.

@@ -8,7 +8,7 @@
  */
 
 #include "../log.h"
-#include "../types.h"
+#include "../unix/types.h"
 
 #include "gui/functions.h"
 

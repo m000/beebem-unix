@@ -53,10 +53,8 @@
 #endif
 #endif
 
-//++
-#include "beebsdl.h"
+#include "unix/beebsdl.h"
 #include "user_config.h"
-//<+
 
 using namespace std;
 

@@ -4,7 +4,7 @@
 
 #include "log.h"
 
-#include "beebsdl.h"
+#include "unix/beebsdl.h"
 //#include "include/gui_functions.h"
 
 #include "gui/gui.h"

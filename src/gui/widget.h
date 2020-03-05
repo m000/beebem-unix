@@ -10,11 +10,10 @@
 #ifndef _DW_WIDGET_H_
 #define _DW_WIDGET_H_
 
-#include "../types.h"
-
-#include "gui/widget.h"
-
 #include <SDL.h>
+
+#include "../unix/types.h"
+#include "gui/widget.h"
 
 #define EG_WIDGET_MAX_NAME_SIZE 256
 #define EG_WIDGET_MAX_STRING_VALUE_SIZE 1024

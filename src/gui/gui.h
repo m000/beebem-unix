@@ -7,11 +7,14 @@
  *	---
  */
 
-#include "../types.h"
+#include <SDL.h>
 
+#include "../unix/types.h"
 #include "gui/box.h"
 #include "gui/button.h"
+#include "gui/guisdl.h"
 #include "gui/label.h"
+#include "gui/messagebox.h"
 #include "gui/progressbar.h"
 #include "gui/radiobutton.h"
 #include "gui/radiogroup.h"
@@ -22,9 +25,3 @@
 #include "gui/togglebutton.h"
 #include "gui/widget.h"
 #include "gui/window.h"
-
-#include "gui/messagebox.h"
-
-#include "gui/guisdl.h"
-
-#include <SDL.h>

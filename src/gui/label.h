@@ -10,13 +10,12 @@
 #ifndef _DW_LABEL_H_
 #define _DW_LABEL_H_
 
-#include "gui/guisdl.h"
-#include "../types.h"
+#include <SDL.h>
 
+#include "../unix/types.h"
+#include "gui/guisdl.h"
 #include "gui/widget.h"
 #include "gui/window.h"
-
-#include <SDL.h>
 
 /* Widget type:
  */

@@ -10,12 +10,12 @@
 #ifndef _DW_BOX_H_
 #define _DW_BOX_H_
 
+#include <SDL.h>
+
+#include "../unix/types.h"
 #include "gui/guisdl.h"
-#include "../types.h"
 #include "gui/widget.h"
 #include "gui/window.h"
-
-#include <SDL.h>
 
 /* Widget type:
  *
