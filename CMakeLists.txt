@@ -10,6 +10,10 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# Warn about unreachable code.
+SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
+
 # Souce files to use.
 file(GLOB beebem_src
     "src/*.h"
