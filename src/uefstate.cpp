@@ -4,6 +4,7 @@
 
 // (C) June 2001 Richard Gellman
 
+#include "unix/beebsdl_new.h"
 #include "6502core.h"
 #include "beebmem.h"
 #include "beebsound.h"

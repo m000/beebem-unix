@@ -23,6 +23,7 @@ can be determined under normal use".
 
 -- end of legal crap - Richard Gellman :) */
 
+#include "unix/beebsdl_new.h"
 #include "6502core.h"
 #include "beebemrc.h"
 #include "disc1770.h"

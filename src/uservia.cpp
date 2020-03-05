@@ -25,6 +25,7 @@
 #include <iostream>
 #include <stdio.h>
 
+#include "unix/beebsdl_new.h"
 #include "6502core.h"
 #include "beebemrc.h"
 #include "debug.h"

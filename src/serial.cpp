@@ -35,6 +35,7 @@ can be determined under normal use".
 //<-
 #include <stdio.h>
 
+#include "unix/beebsdl_new.h"
 #include "6502core.h"
 #include "beebemrc.h"
 #include "beebsound.h"

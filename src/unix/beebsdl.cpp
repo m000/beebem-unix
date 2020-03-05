@@ -19,6 +19,7 @@
 /* Please report any problems to the author at beebem@treblig.org           */
 /****************************************************************************/
 
+#include "beebsdl_new.h"
 #include "beebsdl.h"
 
 #include "line.h"

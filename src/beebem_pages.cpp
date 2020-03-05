@@ -5,6 +5,7 @@
 
 #include "beebemrc.h"
 #include "beebwin.h"
+#include "unix/beebsdl_new.h"
 
 #include "fake_registry.h"
 
@@ -1155,7 +1156,7 @@ static EG_BOOL Make_Main(SDL_Surface *dst_ptr)
     loc = CalcRect(10, win.h - 10 - 17, 150, 16);
     widget_ptr = EG_TickBox_Create("main_fullscreen", col, "Fullscreen", loc);
     gui.fullscreen_widget_ptr = widget_ptr;
-    if (GetFullscreenState() != 0)
+    if (IsFullScreen())
         EG_TickBox_Tick(widget_ptr);
     (void)EG_TickBox_SetMyCallback_OnClick(widget_ptr, Main_Tick_FullScreen, &gui);
     //(void) EG_TickBox_Disable(widget_ptr);

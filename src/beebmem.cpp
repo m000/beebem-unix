@@ -28,6 +28,7 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include "unix/beebsdl_new.h"
 #include "6502core.h"
 #include "atodconv.h"
 #include "beebmem.h"

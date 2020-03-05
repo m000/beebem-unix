@@ -59,6 +59,7 @@
 #include "z80.h"
 #include "z80mem.h"
 
+#include "unix/beebsdl_new.h"
 #include "unix/beebsdl.h"
 #include "unix/line.h" // SDL Stuff
 #include "log.h"
@@ -74,11 +75,6 @@
 #ifdef MULTITHREAD
 #undef MULTITHREAD
 #endif
-
-/* Make global reference to command line args
- */
-int __argc = 0;
-char **__argv = NULL;
 
 /* This needs to be fixed.. ----
  */
@@ -97,7 +93,6 @@ extern VIAState SysVIAState;
 int DumpAfterEach = 0;
 
 unsigned char MachineType;
-BeebWin *mainWin = NULL;
 
 void i86_main(void);
 
@@ -109,69 +104,12 @@ FILE *tlog;
 
 //----------------------------------------------
 
-int done = 0;
 int showing_menu = 0;
 EG_Window *displayed_window_ptr = NULL;
-
-// void CLEAN_EXIT(void)
-//{
-//  /* Quit SDL
-//   */
-//  SDL_Quit();
-//}
 
 void SetActiveWindow(EG_Window *window_ptr)
 {
     displayed_window_ptr = window_ptr;
-}
-
-int GetFullscreenState(void)
-{
-    bool fullscreen_val = false;
-
-    if (mainWin != NULL)
-        fullscreen_val = mainWin->IsFullScreen();
-
-    //	return(fullscreen);
-    return fullscreen_val;
-}
-
-int ToggleFullscreen(void)
-{
-    if (mainWin->IsFullScreen())
-        mainWin->SetFullScreenToggle(false);
-    else
-        mainWin->SetFullScreenToggle(true);
-    SetFullScreenTickbox(mainWin->IsFullScreen());
-
-    Destroy_Screen();
-    if (Create_Screen() != 1)
-    {
-        qFATAL("Could not recreate SDL window!\n");
-        exit(10);
-    }
-
-    /* Update GUI here so it's not missed anywhere - this is
-     * turning into such a bloody MESS...
-     */
-    ClearWindowsBackgroundCacheAndResetSurface();
-    ClearVideoWindow();
-
-    //	if (SDL_WM_ToggleFullScreen(screen_ptr) != 1)
-    //		EG_Log(EG_LOG_WARNING, dL"Could not toggle full-screen mode.", dR);
-
-    //	return(fullscreen);
-    return mainWin->IsFullScreen();
-}
-
-void UnfullscreenBeforeExit(void)
-{
-    /* Hopefully this will fix that annoying bug where the mouse pointer
-     * vanishes on exit.  Is that me, or is it SDL?
-     */
-    //	if (fullscreen)
-    if (mainWin->IsFullScreen())
-        ToggleFullscreen();
 }
 
 void ShowingMenu(void)
@@ -184,27 +122,18 @@ void NoMenuShown(void)
     showing_menu = 0;
 }
 
-void Quit(void)
-{
-    done = 1;
-}
+/* Define globals. */
+int done = 0;
+int __argc = 0;
+char **__argv = NULL;
+BeebWin *mainWin = NULL;
 
 int main(int argc, char *argv[])
 {
-    //--	MSG msg;
+    /* Global references to command line args (like beebem-win). */
+    __argc = argc;
+    __argv = (char **)argv;
 
-    // printf("%d\n", testingit(1, 2, 3));
-
-    //	print_message();
-    //	SDL_Delay(5000);
-
-    /*
-    #define STRING_HASH "EG_Widget_Type_ToggleButton"
-        printf(STRING_HASH " %lX\n", EG_MakeStringHash(STRING_HASH) );
-        exit(1);
-    */
-
-    //+>
     int X11_CapsLock_Down;
     Uint32 ticks = SDL_GetTicks();
     //	int mouse_x=0, mouse_y=0, mouse_move_x, mouse_move_y;
@@ -214,25 +143,23 @@ int main(int argc, char *argv[])
 
     //--	hInst = hInstance;
 
-    /* Create global reference to command line args (like windows does)
-     */
-    __argc = argc;
-    __argv = (char **)argv;
 
-    /* Initialise debugging subsystem.
-     */
+    /* Initialise logging. */
     Log_Init();
 
-    /* Initialize SDL resources.
-     */
-    if (!InitialiseSDL(argc, argv))
+    /* Initialize SDL. */
+    if (InitialiseSDL(argc, argv))
     {
-        qFATAL("Unable to initialise SDL library!");
+        qFATAL("Initialized SDL.");
+        exit(1);
+    }
+    else
+    {
+        qFATAL("Unable to initialise SDL!");
         exit(1);
     }
 
-    /* Initialize GUI API
-     */
+    /* Initialize GUI. */
     if (EG_Initialize() == EG_TRUE)
     {
         qINFO("EG initialized.");
@@ -252,32 +179,22 @@ int main(int argc, char *argv[])
      */
     InitializeFakeRegistry();
 
-    /* ---------------------------------------
-     */
 
     // Create instance of Emulator core:
     mainWin = new BeebWin();
     mainWin->Initialise();
-
-    /* ------------------------------------------------------
-     */
 
     // Create serial threads
     //--	InitThreads();
     //--	CreateThread(NULL,0,(LPTHREAD_START_ROUTINE) SerialThread,NULL,0,&iSerialThread);
     //--	CreateThread(NULL,0,(LPTHREAD_START_ROUTINE) StatThread,NULL,0,&iStatThread);
 
-    /* -------------------------------------------------0----------
-     */
-
     //    tlog = fopen("\\trace.log", "wt");
 
-    /* Clear SDL event queue
-     */
+    /* Clear SDL event queue */
     EG_Draw_FlushEventQueue();
 
-    /* Main loop converted to SDL:
-     */
+    /* Main loop converted to SDL: */
     X11_CapsLock_Down = 0; // =0 not down, used to emulate a key release in X11 (caps has no release event).
 
     /* THIS WILL EVENTUALLY MOVE INTO beebwin.cpp when the MFC event loop is faked
@@ -549,21 +466,20 @@ int main(int argc, char *argv[])
              */
             ticks = SDL_GetTicks();
         }
-
-        //	printf("%d\n", AMXButtons);
-
-        //--	} while(1);
     } while (done == 0);
 
     //--	mainWin->KillDLLs();
 
-    //    	fclose(tlog);
 
-    /* Sometimes the mouse pointer vanishes on exit.
-     * It seems to only happen when fullscreened, so make sure
-     * we unfullscreen before destroying everything.
+    /* 
+     * Exit full-screen mode before program exit.
+     * Fixes bug where mouse pointer vanishes on exit.
+     * XXX: TESTME
      */
-    UnfullscreenBeforeExit();
+    if (mainWin->IsFullScreen())
+    {
+        ToggleFullscreen();
+    }
 
     delete mainWin;
     //--	Kill_Serial();
@@ -579,5 +495,5 @@ int main(int argc, char *argv[])
     UninitialiseSDL();
     Log_UnInit();
 
-    return (0);
+    return 0;
 } /* main */

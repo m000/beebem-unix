@@ -49,15 +49,12 @@ extern char *CFG_REG_KEY;
 extern int done;
 
 extern unsigned char MachineType;
-extern BeebWin *mainWin;
 //-- extern HINSTANCE hInst;
 void WriteLog(char *fmt, ...);
 extern int trace_186;
 
 void Quit(void);
 void SetActiveWindow(EG_Window *window_ptr);
-int GetFullscreenState(void);
-int ToggleFullscreen(void);
 void ShowingMenu(void);
 void NoMenuShown(void);
 

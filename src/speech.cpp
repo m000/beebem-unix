@@ -10,6 +10,7 @@ Based on code written by Frank Palazzolo and others
 #include <stdio.h>
 #include <time.h>
 
+#include "unix/beebsdl_new.h"
 #include "6502core.h"
 #include "beebmem.h"
 #include "beebsound.h"

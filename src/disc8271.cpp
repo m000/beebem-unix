@@ -22,6 +22,7 @@
 
 /* Mike Wyatt 30/8/97 - Added disc write and format support */
 
+#include "unix/beebsdl_new.h"
 #include <fstream>
 #include <iostream>
 #include <stdio.h>

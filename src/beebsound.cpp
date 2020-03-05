@@ -39,6 +39,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "unix/beebsdl_new.h"
 #include "6502core.h"
 #include "avi.h"
 #include "beebmem.h"

@@ -21,6 +21,7 @@
 /* Conveted to use DirectX - Mike Wyatt 11/1/98 */
 // Econet added Rob O'Donnell. robert@irrelevant.com. 28/12/2004.
 
+#include "unix/beebsdl_new.h"
 #include "windows.h"
 #include <stdio.h>
 //-- #include <initguid.h>
