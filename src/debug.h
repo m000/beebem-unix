@@ -5,10 +5,6 @@
 #ifndef DEBUG_HEADER
 #define DEBUG_HEADER
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "viastate.h"
 #include "windows.h"
 

@@ -23,10 +23,6 @@
 #ifndef ATODCONV_HEADER
 #define ATODCONV_HEADER
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 extern int JoystickEnabled;
 extern int JoystickX; /* 16 bit number, 0 = right */
 extern int JoystickY; /* 16 bit number, 0 = down */

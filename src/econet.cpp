@@ -5,10 +5,6 @@
 
 // Standard disclaimers apply.
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 /* Compiling with econet support is optional.  Code
  * needs UNIX but should be easy to convert to other
  * platforms.

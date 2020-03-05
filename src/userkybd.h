@@ -21,10 +21,6 @@
 #ifndef USERKYBD_HEADER
 #define USERKYBD_HEADER
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "port.h"
 #include "windows.h"
 #include <stdlib.h>

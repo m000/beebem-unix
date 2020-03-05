@@ -19,10 +19,6 @@
 /****************************************************************************/
 /* Mike Wyatt and NRM's port to win32 - 7/6/97 */
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <signal.h>
 #include <stdarg.h>
 #include <stdio.h>

@@ -22,10 +22,6 @@
 keyboard emulation - David Alan Gilbert 30/10/94 */
 /* CMOS Ram finalised 06/01/2001 - Richard Gellman */
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "windows.h"
 #include <fstream>
 #include <iostream>

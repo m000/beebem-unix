@@ -20,10 +20,6 @@
 #ifndef _EG_FUNCTIONS_H_
 #define _EG_FUNCTIONS_H_
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 /* START OF functions.h --------------------------------------------------------
  */
 

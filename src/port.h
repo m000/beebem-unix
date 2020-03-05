@@ -24,10 +24,6 @@
 
 #include <limits.h>
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 /* Used for accelerating copies */
 //--#ifdef WIN32
 //--typedef __int64 EightByteType;	// $NRM for MSVC. Will it work though?

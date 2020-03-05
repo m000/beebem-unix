@@ -1,9 +1,5 @@
 /* UEF tape file functions */
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "uef.h"
 #include <math.h>
 #include <stdio.h>

@@ -21,10 +21,6 @@
 /* User VIA support file for the beeb emulator - David Alan Gilbert 11/12/94 */
 /* Modified from the system via */
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <fstream>
 #include <iostream>
 #include <stdio.h>

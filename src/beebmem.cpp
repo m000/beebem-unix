@@ -21,10 +21,6 @@
 /* Beebemulator - memory subsystem - David Alan Gilbert 16/10/94 */
 // Econet emulation: Rob O'Donnell robert@irrelevant.com 28/12/2004
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <ctype.h>
 #include <fstream>
 #include <iostream>

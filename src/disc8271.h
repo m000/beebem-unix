@@ -23,10 +23,6 @@
 #ifndef DISC8271_HEADER
 #define DISC8271_HEADER
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 extern int Disc8271Trigger; /* Cycle based time Disc8271Trigger */
 
 void LoadSimpleDSDiscImage(char *FileName, int DriveNum, int Tracks);

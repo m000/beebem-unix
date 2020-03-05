@@ -4,10 +4,6 @@
 #ifndef SCSI_HEADER
 #define SCSI_HEADER
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 extern char HardDriveEnabled;
 
 void SCSIReset(void);

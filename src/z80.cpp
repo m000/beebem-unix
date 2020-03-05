@@ -20,10 +20,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. */
 /* This file was generated from simz80.pl
    with the following choice of options */
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 const char *perl_params = "combine=0,"
                           "optab=0,"
                           "cb_inline=1,"

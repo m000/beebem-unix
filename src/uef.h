@@ -1,10 +1,6 @@
 #ifndef _UEF_H
 #define _UEF_H
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 extern int uef_errno;
 
 /* some defines related to the status byte - these may change! */

@@ -23,10 +23,6 @@
 /* Conveted Win32 port to use DirectSound - Mike Wyatt 11/1/98 */
 // 14/04/01 - Proved that I AM better than DirectSound, by fixing the code thereof ;P
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "beebsound.h"
 
 #include "windows.h"

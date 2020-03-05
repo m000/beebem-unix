@@ -22,10 +22,6 @@
 #ifndef BEEBMEM_HEADER
 #define BEEBMEM_HEADER
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <stdio.h>
 
 extern int RomWritable[16]; /* Allow writing to ROMs on an individual basis */

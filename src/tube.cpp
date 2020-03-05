@@ -22,10 +22,6 @@
 /* Mike Wyatt 7/6/97 - Added undocumented instructions */
 /* Copied for 65C02 Tube core - 13/04/01 */
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <fstream>
 #include <iostream>
 #include <stdio.h>

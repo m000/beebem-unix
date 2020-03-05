@@ -1,10 +1,6 @@
 #ifndef BEEBEM_LOG_H
 #define BEEBEM_LOG_H
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "line.h"
 
 #include <stdarg.h>

@@ -22,10 +22,6 @@
 
 /* Mike Wyatt 7/6/97 - Added undocumented instructions */
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <fstream>
 #include <iostream>
 #include <stdio.h>

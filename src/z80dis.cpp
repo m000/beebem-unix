@@ -1,7 +1,3 @@
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "tube.h"
 #include <memory.h>
 #include <stdio.h>

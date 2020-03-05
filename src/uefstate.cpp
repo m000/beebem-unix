@@ -4,10 +4,6 @@
 
 // (C) June 2001 Richard Gellman
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "6502core.h"
 #include "beebmem.h"
 #include "beebsound.h"

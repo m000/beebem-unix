@@ -23,10 +23,6 @@
 #ifndef TUBE6502_HEADER
 #define TUBE6502_HEADER
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <stdio.h>
 #include "port.h"
 

@@ -4,10 +4,6 @@
 #ifndef DISC1770_HEADER
 #define DISC1770_HEADER
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "windows.h"
 
 extern unsigned char DWriteable[2]; // Write Protect

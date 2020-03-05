@@ -24,10 +24,6 @@
 #ifndef SOUND_HEADER
 #define SOUND_HEADER
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 //-- #ifdef WIN32
 /* Always compile sound code - it is switched on and off using SoundEnabled */
 //-- #define SOUNDSUPPORT

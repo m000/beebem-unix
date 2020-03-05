@@ -27,10 +27,6 @@
 
 /* Richard Gellman 4/2/2001 AAAARGH SHADOW RAM! HELP! */
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <fstream>
 #include <iostream>
 #include <stdio.h>

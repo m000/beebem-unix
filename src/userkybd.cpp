@@ -21,10 +21,6 @@
 
 //-- Not ported at all yet!
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "beebemrc.h"
 #include "main.h"
 #include "userkybd.h"

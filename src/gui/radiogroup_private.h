@@ -10,10 +10,6 @@
 #ifndef _DW_RADIOGROUP_PRIVATE_H_
 #define _DW_RADIOGROUP_PRIVATE_H_
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "../types.h"
 
 #include "gui/widget.h"

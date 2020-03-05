@@ -23,10 +23,6 @@ can be determined under normal use".
 
 -- end of legal crap - Richard Gellman :) */
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "6502core.h"
 #include "beebemrc.h"
 #include "disc1770.h"

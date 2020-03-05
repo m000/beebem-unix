@@ -1,10 +1,6 @@
 #ifndef _FAKE_REGISTRY_H_
 #define _FAKE_REGISTRY_H_
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "types.h"
 #include "windows.h"
 

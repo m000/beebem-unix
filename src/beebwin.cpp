@@ -21,10 +21,6 @@
 /* Conveted to use DirectX - Mike Wyatt 11/1/98 */
 // Econet added Rob O'Donnell. robert@irrelevant.com. 28/12/2004.
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "windows.h"
 #include <stdio.h>
 //-- #include <initguid.h>

@@ -23,10 +23,6 @@
 #ifndef VIA_HEADER
 #define VIA_HEADER
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "debug.h"
 #include "sysvia.h"
 #include "uefstate.h"

@@ -4,10 +4,6 @@
 // Mike Wyatt - Nov 2004
 // Econet added Rob O'Donnell 2004-12-28.
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "6502core.h"
 #include "beebemrc.h"
 #include "beebmem.h"

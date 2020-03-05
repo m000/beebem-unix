@@ -1,10 +1,6 @@
 #ifndef VS_HEADER
 #define VS_HEADER
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 typedef struct
 {
     unsigned char ora, orb;

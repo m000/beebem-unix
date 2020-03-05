@@ -22,10 +22,6 @@
 
 /* Mike Wyatt 30/8/97 - Added disc write and format support */
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <fstream>
 #include <iostream>
 #include <stdio.h>

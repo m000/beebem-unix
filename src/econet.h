@@ -7,10 +7,6 @@
 #ifndef ECONET_HEADER
 #define ECONET_HEADER
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 // Emulated ADLC control registers.
 // control1_b0 is AC
 // this splits register address 0x01 as control2 and control3

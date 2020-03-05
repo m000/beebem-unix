@@ -21,10 +21,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. */
 
 /* SEE limits and BYTE-, WORD- and FASTREG - defintions im MEM_MMU.h */
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "z80mem.h"
 
 typedef unsigned short WORD;

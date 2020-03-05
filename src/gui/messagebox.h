@@ -10,10 +10,6 @@
 #ifndef _DW_MESSAGEBOX_H_
 #define _DW_MESSAGEBOX_H_
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #define EG_MESSAGEBOX_STOP 0
 #define EG_MESSAGEBOX_QUESTION 1
 #define EG_MESSAGEBOX_INFORMATION 2

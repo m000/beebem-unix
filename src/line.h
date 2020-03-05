@@ -30,10 +30,6 @@
 #ifndef LINE_H
 #define LINE_H
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 /* This uses a little trick to allow __LINE__ to be
  * stringified.  It then adds __FILE__ nicely formatted
  * as a string literal.

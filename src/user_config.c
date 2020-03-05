@@ -26,10 +26,6 @@
  *      ---
  */
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "beebem.h"
 #include "beebsdl.h"
 #include "gui/gui.h"

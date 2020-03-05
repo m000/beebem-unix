@@ -5,10 +5,6 @@
  *	(See windows.cpp for MFC wrapper and Windows style MessageBox function.)
  */
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "../log.h"
 
 #include "gui/messagebox.h"

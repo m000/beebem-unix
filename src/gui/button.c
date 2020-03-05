@@ -9,10 +9,6 @@
 EG_BUTTON_MIN_CLICK_TIME
  */
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "../log.h"
 
 #include "gui/functions.h"

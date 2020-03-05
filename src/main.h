@@ -26,10 +26,6 @@
 #endif
 //#define MULTITHREAD
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "beebsdl.h"
 #include "beebwin.h"
 #include "windows.h"

@@ -5,10 +5,6 @@
 #if !defined(_cRegistry_H_)
 #define _cRegistry_H_
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "windows.h"
 #define MAX_BUFF_LENGTH 1024 // maximum length of data (in bytes) that you may read in.
 

@@ -1,10 +1,6 @@
 #ifndef SDL_HEADER
 #define SDL_HEADER
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <SDL.h>
 
 #include "types.h"

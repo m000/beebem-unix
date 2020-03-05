@@ -4,10 +4,6 @@
 #ifndef _FAKE_MS_WINDOWS_H_
 #define _FAKE_MS_WINDOWS_H_
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "beebsdl.h"
 #include "log.h"
 #include <SDL.h>

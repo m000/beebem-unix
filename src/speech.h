@@ -2,10 +2,6 @@
 /* usually 640000 for 8000 Hz sample rate or */
 /* usually 800000 for 10000 Hz sample rate.  */
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #define MAX_SAMPLE_CHUNK 8000
 
 #define FRAC_BITS 14

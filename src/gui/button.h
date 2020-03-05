@@ -10,10 +10,6 @@
 #ifndef _DW_BUTTON_H_
 #define _DW_BUTTON_H_
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "gui/guisdl.h"
 #include "../types.h"
 
