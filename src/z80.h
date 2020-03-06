@@ -21,8 +21,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. */
 
 /* SEE limits and BYTE-, WORD- and FASTREG - defintions im MEM_MMU.h */
 
-#include "z80mem.h"
-
 typedef unsigned short WORD;
 
 /* two sets of accumulator / flags */
@@ -91,8 +89,8 @@ void init_z80();
 void Debug_Z80();
 int Z80_Disassemble(int adr, char *s);
 void PrintHex(int PC);
-extern int TorchTube;
-extern int Enable_Z80;
+extern bool TorchTube;
+extern bool Enable_Z80;
 unsigned char ReadZ80Mem(int pc);
 void WriteZ80Mem(int pc, unsigned char data);
 void Disp_RegSet1(char *str);

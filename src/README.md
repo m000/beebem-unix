@@ -153,10 +153,10 @@ The directory layout is as following:
 | video.h                                | legacy  |                                                                   |              |
 | windows.cpp                            | legacy  |                                                                   |              |
 | windows.h                              | legacy  |                                                                   |              |
-| z80.cpp                                | legacy  |                                                                   |              |
-| z80.h                                  | legacy  |                                                                   |              |
+| z80.cpp                                | legacy  | Z80 instruction set simulator.                                    | sync w. win  |
+| z80.h                                  | legacy  |                                                                   | in-sync      |
 | z80_support.cpp                        | legacy  |                                                                   |              |
-| z80dis.cpp                             | legacy  |                                                                   |              |
-| z80mem.h                               | legacy  |                                                                   |              |
+| z80dis.cpp                             | legacy  |                                                                   | in-sync      |
+| z80mem.h                               | legacy  |                                                                   | in-sync      |
 | zlib/zconf.h                           | legacy  | Headers for using (the ancient) libz found in 90s Unix variants.  | sync w. win  |
 | zlib/zlib.h                            | legacy  | Headers for using (the ancient) libz found in 90s Unix variants.  | sync w. win  |
