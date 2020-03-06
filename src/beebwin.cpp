@@ -259,7 +259,7 @@ BeebWin::BeebWin()
 }
 
 /****************************************************************************/
-void BeebWin::Initialise()
+void BeebWin::Initialize()
 {
     //+>
     SetWindowText(m_hWnd, WindowTitle);
@@ -335,18 +335,18 @@ void BeebWin::Initialise()
     //--		InitDirectX();
 
     //--	if (FAILED(CoInitialize(NULL)))
-    //--		MessageBox(m_hWnd,"Failed to initialise COM\n",WindowTitle,MB_OK|MB_ICONERROR);
+    //--		MessageBox(m_hWnd,"Failed to initialize COM\n",WindowTitle,MB_OK|MB_ICONERROR);
 
     //--	InitTextToSpeech();
     //--	InitTextView();
 
-    /* Initialise printer */
+    /* Initialize printer */
     if (PrinterEnabled)
         PrinterEnable(m_PrinterDevice);
     else
         PrinterDisable();
 
-    /* Joysticks can only be initialised after the window is created (needs hwnd) */
+    /* Joysticks can only be initialized after the window is created (needs hwnd) */
     if (m_MenuIdSticks == IDM_JOYSTICK)
         InitJoystick();
 
@@ -1049,7 +1049,7 @@ void BeebWin::InitMenu(void)
     UpdateMonitorMenu();
     UpdateDisableKeysMenu();
 
-    /* Initialise the ROM Menu. */
+    /* Initialize the ROM Menu. */
     SetRomMenu();
 
     SetSoundMenu();
@@ -1272,7 +1272,7 @@ void BeebWin::InitJoystick(void)
     //--	}
     //--	else
     //--	{
-    //--		MessageBox(m_hWnd, "Failed to initialise the joystick",
+    //--		MessageBox(m_hWnd, "Failed to initialize the joystick",
     //--					WindowTitle, MB_OK|MB_ICONERROR);
     //--	}
 }
@@ -1907,7 +1907,7 @@ void BeebWin::updateLines(HDC hDC, int starty, int nlines)
     //--	int TextStart=240;
     //--	int i,j;
     //--
-    //--	// Not initialised yet?
+    //--	// Not initialized yet?
     //--	if (m_screen == NULL)
     //--		return;
     //--
@@ -4969,7 +4969,7 @@ void BeebWin::HandleCommand(int MenuId)
         }
         else
         {
-            /* Initialise new selection */
+            /* Initialize new selection */
             m_MenuIdSticks = MenuId;
             if (m_MenuIdSticks == IDM_JOYSTICK)
             {
@@ -6186,7 +6186,7 @@ void BeebWin::CaptureVideo()
     //--									DIB_RGB_COLORS, (void**)&m_AviScreen, NULL, 0);
     //--		if (SelectObject(m_AviDC, m_AviDIB) == NULL)
     //--		{
-    //--			MessageBox(m_hWnd, "Failed to initialise AVI buffers",
+    //--			MessageBox(m_hWnd, "Failed to initialize AVI buffers",
     //--				WindowTitle, MB_OK|MB_ICONERROR);
     //--			delete aviWriter;
     //--			aviWriter = NULL;
@@ -6206,7 +6206,7 @@ void BeebWin::CaptureVideo()
     //--			}
     //--			m_AviFrameSkipCount = 0;
     //--
-    //--			HRESULT hr = aviWriter->Initialise(FileName, wfp, &m_Avibmi,
+    //--			HRESULT hr = aviWriter->Initialize(FileName, wfp, &m_Avibmi,
     //--							(int)(m_FramesPerSecond > 46 ? 50 : m_FramesPerSecond) / (m_AviFrameSkip+1),
     // m_hWnd);
     //--			if (FAILED(hr))
@@ -6282,7 +6282,7 @@ void BeebWin::InitTextToSpeech(void)
     //--		{
     //--			m_SpVoice = NULL;
     //--			m_TextToSpeechEnabled = 0;
-    //--			MessageBox(m_hWnd,"Failed to initialise text-to-speech engine\n",
+    //--			MessageBox(m_hWnd,"Failed to initialize text-to-speech engine\n",
     //--					   WindowTitle,MB_OK|MB_ICONERROR);
     //--		}
     //--	}

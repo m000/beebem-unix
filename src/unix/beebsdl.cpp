@@ -639,7 +639,7 @@ void Destroy_Screen(void)
         SDL_FreeSurface(screen_ptr);
 }
 
-int InitialiseSDL(int argc, char *argv[])
+int InitializeSDL(int argc, char *argv[])
 {
     char video_hardware[1024];
     Uint32 flags;
@@ -653,7 +653,7 @@ int InitialiseSDL(int argc, char *argv[])
      */
     if (SDL_Init(SDL_INIT_VIDEO /* | SDL_INIT_AUDIO */) < 0)
     {
-        fprintf(stderr, "Unable to initialise SDL: %s\n", SDL_GetError());
+        fprintf(stderr, "Unable to initialize SDL: %s\n", SDL_GetError());
         return false;
     }
 
@@ -712,7 +712,7 @@ int InitialiseSDL(int argc, char *argv[])
     //	return true;
 }
 
-void UninitialiseSDL(void)
+void UninitializeSDL(void)
 {
 
     /* If mouse is not visible, make visible.
@@ -1459,7 +1459,7 @@ int ConvertSDLKeyToBBCKey(SDL_keysym keysym /*, int *pressed */, int *col, int *
 //--
 //--	EG_Draw_FlushEventQueue();
 //--
-//--	if (EG_DrawString_Initialise() == EG_FALSE)
+//--	if (EG_DrawString_Initialize() == EG_FALSE)
 //--		return(EG_FALSE);
 //--
 //--
@@ -1531,7 +1531,7 @@ int ConvertSDLKeyToBBCKey(SDL_keysym keysym /*, int *pressed */, int *col, int *
 //--/* Text functions */
 //--static SDL_Surface *label_low = NULL, *label_high = NULL;
 //--
-//--static EG_BOOL EG_DrawString_Initialise(void)
+//--static EG_BOOL EG_DrawString_Initialize(void)
 //--{	//int i;
 //--	char largefont[1024];
 //--        char smallfont[1024];

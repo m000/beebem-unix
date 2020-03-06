@@ -1185,7 +1185,7 @@ INLINE static int16 ZeroPgYAddrModeHandler_Address(void)
 } /* ZeroPgYAddrModeHandler */
 
 /*-------------------------------------------------------------------------*/
-/* Initialise 6502core                                                     */
+/* Initialize 6502core                                                     */
 void Init6502core(void)
 {
     ProgramCounter = BeebReadMem(0xfffc) | (BeebReadMem(0xfffd) << 8);

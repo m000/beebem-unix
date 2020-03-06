@@ -22,7 +22,7 @@ AVIWriter::AVIWriter()
     AVIFileInit();
 }
 
-HRESULT AVIWriter::Initialise(const CHAR *pszFileName,
+HRESULT AVIWriter::Initialize(const CHAR *pszFileName,
                               const WAVEFORMATEX *WaveFormat,
                               const bmiData *BitmapFormat,
                               int fps,

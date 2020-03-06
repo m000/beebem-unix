@@ -697,7 +697,7 @@ void StatThread(void *lpParam)
         }
         if ((bSerialStateChanged) && (!bWaitingForData))
         {
-            // Shut off serial port, and re-initialise
+            // Shut off serial port, and re-initialize
             InitThreads();
             bSerialStateChanged = FALSE;
         }
@@ -749,7 +749,7 @@ void SerialThread(void *lpParam)
 void InitSerialPort(void)
 {
     BOOL bPortStat;
-    // Initialise COM port
+    // Initialize COM port
     if ((SerialPortEnabled) && (!TouchScreenEnabled))
     {
         if (SerialPort == 1)

@@ -86,7 +86,7 @@ class BeebWin
         GREEN
     } palette_type;
 
-    void Initialise();
+    void Initialize();
 
     BeebWin();
     ~BeebWin();

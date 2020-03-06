@@ -16,7 +16,7 @@ public:
     virtual ~AVIWriter();
 
     // Open file
-    HRESULT Initialise(const CHAR *psFileName,
+    HRESULT Initialize(const CHAR *psFileName,
                        const WAVEFORMATEX *WaveFormat,
                        const bmiData *BitmapFormat,
                        int fps,

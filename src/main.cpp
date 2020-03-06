@@ -106,25 +106,20 @@ int main(int argc, char *argv[])
     int X11_CapsLock_Down;
     Uint32 ticks = SDL_GetTicks();
     //	int mouse_x=0, mouse_y=0, mouse_move_x, mouse_move_y;
-    //	BOOL ignore_next_mouse_movement = FALSE;
     //	int buttons=0;
-    //<+
 
-    //--	hInst = hInstance;
-
-
-    /* Initialise logging. */
+    /* Initialize logging. */
     Log_Init();
 
     /* Initialize SDL. */
-    if (InitialiseSDL(argc, argv))
+    if (InitializeSDL(argc, argv))
     {
         qFATAL("Initialized SDL.");
         exit(1);
     }
     else
     {
-        qFATAL("Unable to initialise SDL!");
+        qFATAL("Unable to initialize SDL!");
         exit(1);
     }
 
@@ -151,7 +146,7 @@ int main(int argc, char *argv[])
 
     // Create instance of Emulator core:
     mainWin = new BeebWin();
-    mainWin->Initialise();
+    mainWin->Initialize();
 
     // Create serial threads
     //--	InitThreads();
@@ -461,7 +456,7 @@ int main(int argc, char *argv[])
 
     DestroyFakeRegistry();
     DestroyBeebEmGUI();
-    UninitialiseSDL();
+    UninitializeSDL();
     Log_UnInit();
 
     return 0;

@@ -182,7 +182,7 @@ void EconetReset(void)
 
     // clear all status conditions
     ADLC.status1 = 0; // cts - clear to send line input (no collissions talking udp)
-    ADLC.status2 = 0; // dcd - no clock (until sockets initialised and open)
+    ADLC.status2 = 0; // dcd - no clock (until sockets initialized and open)
     ADLC.sr2pse = 0;
 
     // software stuff:

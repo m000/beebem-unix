@@ -157,7 +157,7 @@ BOOL UserKeyboardDialog(HWND hwndParent)
     //--
     //--    pfnDlg = MakeProcInstance( (FARPROC)UserKeyboard_DlgProc, hInst );
     //--
-    //--    // Initialise locals used during this windows life.
+    //--    // Initialize locals used during this windows life.
     //--	hwndMain = hwndParent;
     //--	hwndGetkey = NULL;
     //--

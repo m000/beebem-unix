@@ -174,7 +174,7 @@ static void NotImp(const char *NotImpCom)
 static void DoLoadHead(void){}; /* DoLoadHead */
 
 /*--------------------------------------------------------------------------*/
-/* Initialise our disc structures                                           */
+/* Initialize our disc structures                                           */
 static void InitDiscStore(void)
 {
     int head, track, drive;

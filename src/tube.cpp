@@ -1665,7 +1665,7 @@ void ResetTube(void)
     TubeNMIStatus = 0;
 }
 
-/* Initialise 6502core */
+/* Initialize 6502core */
 void Init65C02core(void)
 {
     Reset65C02();

@@ -10,7 +10,7 @@
  *
  * Will print something like:
  *
- * "beebwin.cc:313, void BeebWin::Initialise(): Got this far!"
+ * "beebwin.cc:313, void BeebWin::Initialize(): Got this far!"
  *
  * See ../log.c for additional convenient functions/macros for logging
  *

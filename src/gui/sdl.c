@@ -4,7 +4,7 @@
 #include "../unix/types.h"
 #include "gui/guisdl.h"
 
-static EG_BOOL EG_DrawString_Initialise(void);
+static EG_BOOL EG_DrawString_Initialize(void);
 static void EG_DrawString_Free(void);
 
 /* Rendering scale 1 = 100%, 0.5 = 50%
@@ -26,7 +26,7 @@ EG_BOOL EG_Initialize(void)
 
     EG_Draw_FlushEventQueue();
 
-    if (EG_DrawString_Initialise() == EG_FALSE)
+    if (EG_DrawString_Initialize() == EG_FALSE)
         return (EG_FALSE);
 
     return (EG_TRUE);
@@ -114,7 +114,7 @@ void EG_Draw_Enable_Update(void)
 /* Text functions */
 static SDL_Surface *label_low = NULL, *label_high = NULL;
 
-static EG_BOOL EG_DrawString_Initialise(void)
+static EG_BOOL EG_DrawString_Initialize(void)
 { // int i;
     char largefont[1024];
     char smallfont[1024];

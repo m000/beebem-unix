@@ -78,8 +78,8 @@ extern int cfg_WaitType;
 /*	-	-	-	-
  */
 
-extern int InitialiseSDL(int argc, char *argv[]);
-extern void UninitialiseSDL(void);
+extern int InitializeSDL(int argc, char *argv[]);
+extern void UninitializeSDL(void);
 extern void RenderLine(int, int, int);
 extern void SaferSleep(unsigned int);
 extern unsigned char *GetSDLScreenLinePtr(int);
@@ -170,7 +170,7 @@ Uint32 EG_Draw_CalcTimePassed(Uint32 starttime, Uint32 endtime);
 int InitializeSDLSound(int soundfrequency);
 void FreeSDLSound(void);
 
-// static EG_BOOL EG_DrawString_Initialise(void);
+// static EG_BOOL EG_DrawString_Initialize(void);
 // static void EG_DrawString_Free(void);
 
 #endif

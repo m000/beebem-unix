@@ -24,7 +24,7 @@ typedef struct
 static MallocAllocList EG_Malloc_AllocationList[EG_DEBUG_MAXMALLOCS];
 static unsigned long EG_Malloc_AllocationCount = 0;
 
-static void EG_Malloc_InitialiseList()
+static void EG_Malloc_InitializeList()
 {
     long i;
     for (i = 0; i < EG_DEBUG_MAXMALLOCS; i++)
@@ -98,7 +98,7 @@ void *EG_Malloc(size_t size)
 
     if (b == EG_FALSE)
     {
-        EG_Malloc_InitialiseList();
+        EG_Malloc_InitializeList();
         b = EG_TRUE;
     }
     char *ptr;
