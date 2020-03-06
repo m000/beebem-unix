@@ -1384,7 +1384,7 @@ static struct BeebKeyTrans SDLtoBeebEmKeymap[] = {
     {SDLK_COMMA, 6, 6},     // "<" / ","
     {SDLK_EQUALS, 1, 7},    // "=" / "-"
     {SDLK_PERIOD, 6, 7},    // ">" / "."
-    {SDLK_BACKQUOTE, 2, 8}, // "-" / "£"
+    {SDLK_BACKQUOTE, 2, 8}, // "-" / "Â£"
 
     {SDLK_SEMICOLON, 4, 7}, // "@"
     {SDLK_QUOTE, 4, 8},     // "*" / ":"

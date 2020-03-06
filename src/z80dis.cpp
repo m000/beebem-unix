@@ -19,7 +19,7 @@ int Z80_Disassemble(int adr, char *s)
     static STR dreg[4] = {"BC", "DE", "HL", "SP"};
     static STR cond[8] = {"NZ", "Z", "NC", "C", "PO", "PE", "P", "M"};
     static STR arith[8] = {"ADD\tA,", "ADC\tA,", "SUB\t", "SBC\tA,", "AND\t", "XOR\t", "OR\t", "CP\t"};
-    CHAR stemp[80]; // temp.String für sprintf()
+    CHAR stemp[80]; // temp.String for sprintf()
     CHAR ireg[3];   // temp.Indexregister
     int size = 1;
 
