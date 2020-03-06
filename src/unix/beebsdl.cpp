@@ -71,7 +71,6 @@ int samples;
 BeebSDL::BeebSDL(int argc, char *argv[])
 {
     char video_hardware[1024];
-    Uint32 flags;
 
     // Initialize SDL and handle failures.
     if (SDL_Init(SDL_INIT_VIDEO /* | SDL_INIT_AUDIO */) < 0)
@@ -81,9 +80,17 @@ BeebSDL::BeebSDL(int argc, char *argv[])
     }
 
     // Cleanup SDL on exit.
-    if (!atexit(SDL_Quit))
+    if (atexit(SDL_Quit) < 0)
     {
         pFATAL("Failed to set exit cleanup handler for SDL.");
+        exit(1);
+    }
+
+    // Area for the BeebEm emulator to draw on.
+    this->video = SDL_CreateRGBSurface(SDL_SWSURFACE, BEEBSDL_VIDEO_W, BEEBSDL_VIDEO_H, 8, 0, 0, 0, 0);
+    if (this->video == nullptr)
+    {
+        pFATAL("Unable to create a bitmap buffer: %s", SDL_GetError());
         exit(1);
     }
 
@@ -108,19 +115,6 @@ BeebSDL::BeebSDL(int argc, char *argv[])
         pDEBUG("SDL on X11: %s", sBOOL(this->cfg_x11));
     }
 
-
-    /* Create an area the BeebEm emulator core (the Windows code)
-     * can draw on.  It's hardwired to an 800x600 8bit byte per pixel
-     * bitmap.
-     */
-    flags = SDL_SWSURFACE;
-    if ((this->video = SDL_CreateRGBSurface(flags, BEEBEM_VIDEO_CORE_SCREEN_WIDTH, BEEBEM_VIDEO_CORE_SCREEN_HEIGHT, 8,
-                                             0, 0, 0, 0)) == NULL)
-    {
-        fprintf(stderr, "Unable to create a bitmap buffer: %s\n", SDL_GetError());
-        exit(1);
-    }
-
     // Create scaling table to convert 512/256 to 480/240.
     // XXX: hardwired values - shouldn't this be relative to emulator/graphics mode resolution?
     for (int i = 0; i < 1024; i++)
@@ -129,20 +123,23 @@ BeebSDL::BeebSDL(int argc, char *argv[])
     }
 
     // Create the default screen.
-    int r = Create_Screen();
+    this->CreateScreen(RESOLUTION_640X480_S);
 
     // Setup colors so we at least have something. The emulator core will
     // changes these later when the fake registry is read, but we want
     // enough colors set so the GUI (the message box) will be rendered
     // correctly.
     unsigned char cols[8];
-    SetBeebEmEmulatorCoresPalette(cols, BeebWin::RGB);
+    //SetBeebEmEmulatorCoresPalette(cols, BeebWin::RGB);
 
     return; 
 
-    //	InitializeSDLSound(22050);		// Fix hardwiring later..
-    //	SDL_Delay(500);				// Give sound some time to init
-    //	return true;
+#if(BEEBSDL_HAVE_SOUND)
+    InitializeSDLSound(BEEBSDL_SAMPLE_RATE);
+  	SDL_Delay(500);  // wait for sound to initialize
+#else
+    pINFO("SDL sound is disabled.");
+#endif
 }
 
 // Sigh, look what I've reduced myself to..  The sound support here is truly
@@ -326,8 +323,6 @@ SDL_Surface *screen_ptr = NULL;
 int cfg_EmulateCrtGraphics = 1;
 int cfg_EmulateCrtTeletext = 0;
 
-int cfg_Fullscreen_Resolution = RESOLUTION_640X480_S; // -1;
-int cfg_Windowed_Resolution = RESOLUTION_640X480_S;   // -1;
 int cfg_VerticalOffset = ((512 - 480) / 2);
 
 /* If this is defined then the sound code will dump samples (causing distortion)
@@ -353,9 +348,6 @@ int cfg_WantLowLatencySound = 1;
 /* Wait type for 'sleep'.
  */
 int cfg_WaitType = OPT_SLEEP_OS;
-
-/*	-	-	-	-	-	-	-
- */
 
 SDL_AudioSpec wanted;
 
@@ -536,129 +528,40 @@ void SetBeebEmEmulatorCoresPalette(unsigned char *cols, int palette_type)
     //#endif
 }
 
-int Create_Screen(void)
+void BeebSDL::CreateScreen(Uint32 mode)
 {
-    /* Initialize SDL applications window.
-     * NOTE: Both window and beebSDL->video surfaces are fixed to 8bit
-     * depth at the moment.  I'll work on fixing it later..
-     */
-    Uint32 flags, width, height;
+    // Get resolution information and flags.
+    this->GetModeResolutionInfo(mode, &this->scr_w, &this->scr_h, &this->scr_highres);
+    this->scr_flags = SDL_SWSURFACE;
+    this->scr_mode = mode;
 
-    //#define RESOLUTION_640X512	0
-    //#define RESOLUTION_640X480_S	1
-    //#define RESOLUTION_640X480_V	2
-    //#define RESOLUTION_320X240_S	3
-    //#define RESOLUTION_320X240_V	4
-    //#define RESOLUTION_320X256	5
-
-    // int     cfg_Resolution_Windowed = RESOLUTION_640X512;
-    // int	  cfg_Resolution_Fullscreened;
-
-    width = 640;
-    height = 512;
-
-    // printf("1: start\n");
-
-    // When running in fullscreen mode remember you can exit BeebEm by
-    flags = SDL_SWSURFACE /* | SDL_FULLSCREEN */;
-
-    /* Fullscreened:
-     */
-    //	if ( fullscreen==1) {
+    // Set additional flags.
     if (mainWin != NULL && mainWin->IsFullScreen())
-    {
-        flags |= SDL_FULLSCREEN;
-
-        switch (cfg_Fullscreen_Resolution)
-        {
-        case RESOLUTION_640X480_S:
-        case RESOLUTION_640X480_V:
-            width = 640;
-            height = 480;
-            EG_Draw_SetToHighResolution();
-            break;
-        case RESOLUTION_320X240_S:
-        case RESOLUTION_320X240_V:
-            width = 320;
-            height = 240;
-            EG_Draw_SetToLowResolution();
-            break;
-        case RESOLUTION_320X256:
-            width = 320;
-            height = 256;
-            EG_Draw_SetToLowResolution();
-            break;
-        case RESOLUTION_640X512:
-            width = 640;
-            height = 512;
-            EG_Draw_SetToHighResolution();
-            break;
-        default:
-            width = 640;
-            height = 480;
-            EG_Draw_SetToHighResolution();
-            break;
-        }
-    }
-    else
-    {
-        switch (cfg_Windowed_Resolution)
-        {
-        case RESOLUTION_640X480_S:
-        case RESOLUTION_640X480_V:
-            width = 640;
-            height = 480;
-            EG_Draw_SetToHighResolution();
-            break;
-        case RESOLUTION_320X240_S:
-        case RESOLUTION_320X240_V:
-            width = 320;
-            height = 240;
-            EG_Draw_SetToLowResolution();
-            break;
-        case RESOLUTION_320X256:
-            width = 320;
-            height = 256;
-            EG_Draw_SetToLowResolution();
-            break;
-        case RESOLUTION_640X512:
-            width = 640;
-            height = 512;
-            EG_Draw_SetToHighResolution();
-            break;
-
-        default:
-            width = 640;
-            height = 512;
-            EG_Draw_SetToHighResolution();
-            break;
-        }
-    }
-
+        this->scr_flags |= SDL_FULLSCREEN;
 #ifdef WITH_FORCED_CM
-    flags |= SDL_HWPALETTE;
+    // XXX: What is forced cm???
+    this->scr_flags |= SDL_HWPALETTE;
 #endif
 
-    // printf("2: flags set\n");
+    // Set drawing mode.
+    if (this->scr_highres)
+        EG_Draw_SetToHighResolution();
+    else
+        EG_Draw_SetToLowResolution();
 
-    /* Make sure screen surface was free'd.
-     */
-    if (screen_ptr != NULL)
-        Destroy_Screen();
-
-    //      if ( (screen_ptr=SDL_SetVideoMode(SDL_WINDOW_WIDTH, SDL_WINDOW_HEIGHT
-    if ((screen_ptr = SDL_SetVideoMode(width, height, 8, flags)) == NULL)
+    // Create screen.
+    this->DestroyScreen();
+    this->screen = SDL_SetVideoMode(this->scr_w, this->scr_h, 8, this->scr_flags);
+    if (this->screen == nullptr)
     {
-        fprintf(stderr, "Unable to set video mode: %s\n", SDL_GetError());
-
-        return false;
+        pFATAL("Failed to create %ux%u screen for mode %u: %s",
+               this->scr_w, this->scr_h, this->scr_mode, SDL_GetError());
+        exit(1);
     }
 
-    /* Update GUI pointers to screen surface.
-     */
+    // Update GUI pointers to screen surface.
     ClearWindowsBackgroundCacheAndResetSurface();
 
-    // printf("3: SDL_SetVideoMode called\n");
 
     /* Give our new surface the same palette as the physical application
      * window
@@ -672,21 +575,34 @@ int Create_Screen(void)
 
     // DL_SetColors(SDL_Surface *surface, SDL_Color *colors, int firstcolor, int ncolors);
 
-    SDL_SetColors(screen_ptr, beebSDL->video->format->palette->colors, 0, beebSDL->video->format->palette->ncolors - 1);
-
-    // printf("4: SDL_SetColors called\n");
+    SDL_SetColors(screen_ptr, this->video->format->palette->colors, 0, this->video->format->palette->ncolors - 1);
 
     ClearVideoWindow();
 
-    // printf("5: ClearVideoWindow called - now returning with true\n");
-
-    return true;
+    return;
 }
 
-void Destroy_Screen(void)
+void BeebSDL::GetModeResolutionInfo(Uint32 mode, Uint32 *w, Uint32 *h, bool *highres)
 {
-    if (screen_ptr != NULL)
-        SDL_FreeSurface(screen_ptr);
+    switch (mode)
+    {
+    case RESOLUTION_320X240_S:
+    case RESOLUTION_320X240_V:
+        *w = 320; *h = 240; *highres = false;
+        break;
+    case RESOLUTION_320X256:
+        *w = 320; *h = 256; *highres = false;
+        break;
+    case RESOLUTION_640X512:
+        *w = 640; *h = 512; *highres = true;
+        break;
+    case RESOLUTION_640X480_S:
+    case RESOLUTION_640X480_V:
+    default:
+        *w = 640; *h = 480; *highres = true;
+        break;
+    }
+    return;
 }
 
 

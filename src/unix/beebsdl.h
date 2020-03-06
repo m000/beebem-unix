@@ -6,8 +6,7 @@
 #include "types.h"
 #include <stdlib.h>
 
-#define BEEBEM_VIDEO_CORE_SCREEN_WIDTH 800
-#define BEEBEM_VIDEO_CORE_SCREEN_HEIGHT 600
+
 
 #define SDL_WINDOW_WIDTH 640
 #define SDL_WINDOW_HEIGHT 512
@@ -90,8 +89,6 @@ extern void CatchupSound(void);
 extern void ClearVideoWindow(void);
 extern void RenderFullscreenFPS(const char *str, int y);
 
-extern void Destroy_Screen(void);
-extern int Create_Screen(void);
 
 /* Delta time to realtime sync:
  */

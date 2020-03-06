@@ -1647,12 +1647,7 @@ static void Change_Windowed_Resolution(EG_Widget *widget_ptr, void *user_ptr)
     EG_Window_Hide(gui.win_screen_ptr);
 
     // Recalc display.
-    Destroy_Screen();
-    if (Create_Screen() != true)
-    {
-        qFATAL("Could not recreate screen! (Bailing out).");
-        exit(10);
-    }
+    beebSDL->CreateScreen();
 
     // Update GUI windows as SDL_Surface has changed:
     ClearWindowsBackgroundCacheAndResetSurface();
@@ -1670,13 +1665,9 @@ static void Change_Fullscreen_Resolution(EG_Widget *widget_ptr, void *user_ptr)
     EG_Window_Hide(gui.win_screen_ptr);
 
     // Recalc display.
-    Destroy_Screen();
-    if (Create_Screen() != true)
-    {
-        qFATAL("Could not recreate screen! (Bailing out).");
-        exit(10);
-    }
+    beebSDL->CreateScreen();
 
+    // XXX: redundant?
     // Update GUI windows as SDL_Surface has changed:
     ClearWindowsBackgroundCacheAndResetSurface();
 

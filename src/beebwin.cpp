@@ -4148,8 +4148,8 @@ void BeebWin::LoadPreferences()
     else
         cfg_Fullscreen_Resolution = RESOLUTION_640X480_S;
 
-    Destroy_Screen();
-    Create_Screen();
+    // XXX: add selected resolution here
+    beebSDL->CreateScreen();
 
     //<+
 
