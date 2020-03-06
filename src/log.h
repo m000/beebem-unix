@@ -46,8 +46,10 @@ extern "C"
 #define qWARN(s) pWARN("%s%s", __L__, s);
 #define qINFO(s) pINFO("%s%s", __L__, s);
 
-// Shorter position indicators for printf etc:
+// Convert bool to string:
+#define sBOOL(e) ((e) ? "true" : "false")
 
+// Shorter position indicators for printf etc:
 #define dL "%s"
 #define dR __L__
 

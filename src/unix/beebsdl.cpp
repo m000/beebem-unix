@@ -55,8 +55,6 @@ unsigned long SDLSoundBufferOffset_OUT;
 // (or dump if sound latency becomes too high):
 unsigned long SDLSoundBufferBytesHave;
 
-unsigned int ScalingTable[1024];
-
 ///* Rendering scale 1 = 100%, 0.5 = 50%
 // */
 // static float scale = 1;
@@ -69,6 +67,83 @@ unsigned int ScalingTable[1024];
 // The actual number of samples per time SDL will want (SDL returns this after
 // we submit our request for a sound stream):
 int samples;
+
+BeebSDL::BeebSDL(int argc, char *argv[])
+{
+    char video_hardware[1024];
+    Uint32 flags;
+
+    // Initialize SDL and handle failures.
+    if (SDL_Init(SDL_INIT_VIDEO /* | SDL_INIT_AUDIO */) < 0)
+    {
+        pFATAL("Unable to initialize SDL: %s", SDL_GetError());
+        exit(1);
+    }
+
+    // Cleanup SDL on exit.
+    if (!atexit(SDL_Quit))
+    {
+        pFATAL("Failed to set exit cleanup handler for SDL.");
+        exit(1);
+    }
+
+    // Load icon.
+    this->icon = SDL_LoadBMP(DATA_DIR "/resources/icon.bmp");
+    if (this->icon != nullptr)
+    {
+        SDL_SetColorKey(this->icon, SDL_SRCCOLORKEY, SDL_MapRGB(icon->format, 0xff, 0x0, 0xff));
+        SDL_WM_SetIcon(icon, nullptr);
+    }
+    else
+    {
+        pERROR("Failed to load application icon: %s", DATA_DIR "/resources/icon.bmp");
+    }
+
+    // Check for X11. Needed to do some caps-lock trickery.
+    if (SDL_VideoDriverName(video_hardware, 1024) != nullptr)
+    {
+        if (strncasecmp(video_hardware, "x11", 1024) == 0)
+            this->cfg_x11 = true;
+        pDEBUG("SDL video hardware: %s", video_hardware);
+        pDEBUG("SDL on X11: %s", sBOOL(this->cfg_x11));
+    }
+
+
+    /* Create an area the BeebEm emulator core (the Windows code)
+     * can draw on.  It's hardwired to an 800x600 8bit byte per pixel
+     * bitmap.
+     */
+    flags = SDL_SWSURFACE;
+    if ((this->video = SDL_CreateRGBSurface(flags, BEEBEM_VIDEO_CORE_SCREEN_WIDTH, BEEBEM_VIDEO_CORE_SCREEN_HEIGHT, 8,
+                                             0, 0, 0, 0)) == NULL)
+    {
+        fprintf(stderr, "Unable to create a bitmap buffer: %s\n", SDL_GetError());
+        exit(1);
+    }
+
+    // Create scaling table to convert 512/256 to 480/240.
+    // XXX: hardwired values - shouldn't this be relative to emulator/graphics mode resolution?
+    for (int i = 0; i < 1024; i++)
+    {
+        this->scaling_table[i] = (Uint32)(i * 0.94);
+    }
+
+    // Create the default screen.
+    int r = Create_Screen();
+
+    // Setup colors so we at least have something. The emulator core will
+    // changes these later when the fake registry is read, but we want
+    // enough colors set so the GUI (the message box) will be rendered
+    // correctly.
+    unsigned char cols[8];
+    SetBeebEmEmulatorCoresPalette(cols, BeebWin::RGB);
+
+    return; 
+
+    //	InitializeSDLSound(22050);		// Fix hardwiring later..
+    //	SDL_Delay(500);				// Give sound some time to init
+    //	return true;
+}
 
 // Sigh, look what I've reduced myself to..  The sound support here is truly
 // shocking.. Please feel free to rewrite it for me..
@@ -241,18 +316,8 @@ void loadsound(void)
 
 */
 
-/* Globals:
- *	-	-	-	-	-	-	-
- */
 
-SDL_Surface *icon = NULL;
-
-SDL_Surface *video_output = NULL;
 SDL_Surface *screen_ptr = NULL;
-
-/* If we're using X11, we need to release the Caps Lock key ourselves.
- */
-int cfg_HaveX11 = 0;
 
 /* Emulate a CRT display (odd scanlines are always dark. Will become an
  * option later on).
@@ -418,7 +483,7 @@ void SetBeebEmEmulatorCoresPalette(unsigned char *cols, int palette_type)
 
     /* Set bitmaps palette.
      */
-    SDL_SetColors(video_output, colors, 0, 8);
+    SDL_SetColors(beebSDL->video, colors, 0, 8);
 
     /* Force X Servers palette to change to our colors.
      */
@@ -440,7 +505,7 @@ void SetBeebEmEmulatorCoresPalette(unsigned char *cols, int palette_type)
     colors[3].r = 0;
     colors[3].g = 255;
     colors[3].b = 0;
-    SDL_SetColors(video_output, colors, 64, 4);
+    SDL_SetColors(beebSDL->video, colors, 64, 4);
 
     //#ifdef WITH_FORCED_CM
     SDL_SetColors(screen_ptr, colors, 64, 4);
@@ -464,32 +529,17 @@ void SetBeebEmEmulatorCoresPalette(unsigned char *cols, int palette_type)
     colors[3].g = (int)(colors[0].g * 0.9);
     colors[3].b = (int)(colors[0].b * 0.9);
 
-    SDL_SetColors(video_output, colors, 68, 4);
+    SDL_SetColors(beebSDL->video, colors, 68, 4);
 
     //#ifdef WITH_FORCED_CM
     SDL_SetColors(screen_ptr, colors, 68, 4);
     //#endif
 }
 
-void CreateScalingTable(void)
-{
-    for (int i = 0; i < 1024; i++)
-    {
-        ScalingTable[i] = (int)(i * 0.94);
-    }
-}
-int GetScaledScanline(int y)
-{
-    if (y < 0 || y >= 1024)
-        return 0;
-
-    return ScalingTable[y];
-}
-
 int Create_Screen(void)
 {
     /* Initialize SDL applications window.
-     * NOTE: Both window and video_output surfaces are fixed to 8bit
+     * NOTE: Both window and beebSDL->video surfaces are fixed to 8bit
      * depth at the moment.  I'll work on fixing it later..
      */
     Uint32 flags, width, height;
@@ -617,12 +667,12 @@ int Create_Screen(void)
     //		fprintf(stderr, "Trying to set 8bit bitmaps palette but have too many colors!\n");
     //		return false;
     //	}
-    //	SDL_SetColors(video_output, screen_ptr->format->palette->colors, 0
+    //	SDL_SetColors(beebSDL->video, screen_ptr->format->palette->colors, 0
     //	 , screen_ptr->format->palette->ncolors);
 
     // DL_SetColors(SDL_Surface *surface, SDL_Color *colors, int firstcolor, int ncolors);
 
-    SDL_SetColors(screen_ptr, video_output->format->palette->colors, 0, video_output->format->palette->ncolors - 1);
+    SDL_SetColors(screen_ptr, beebSDL->video->format->palette->colors, 0, beebSDL->video->format->palette->ncolors - 1);
 
     // printf("4: SDL_SetColors called\n");
 
@@ -639,78 +689,6 @@ void Destroy_Screen(void)
         SDL_FreeSurface(screen_ptr);
 }
 
-int InitializeSDL(int argc, char *argv[])
-{
-    char video_hardware[1024];
-    Uint32 flags;
-    int tmp_argc;
-    char **tmp_argv;
-
-    tmp_argv = argv;
-    tmp_argc = argc;
-
-    /* Initialize SDL and handle failures.
-     */
-    if (SDL_Init(SDL_INIT_VIDEO /* | SDL_INIT_AUDIO */) < 0)
-    {
-        fprintf(stderr, "Unable to initialize SDL: %s\n", SDL_GetError());
-        return false;
-    }
-
-    /* Cleanup SDL when exiting.
-     */
-    atexit(SDL_Quit);
-
-    /* If we are using X11 set Caps lock so it's immediately released.
-     */
-    if (SDL_VideoDriverName(video_hardware, 1024) != NULL)
-    {
-        if (strncasecmp(video_hardware, "x11", 1024) == 0)
-            cfg_HaveX11 = 1;
-    }
-
-    icon = SDL_LoadBMP(DATA_DIR "/resources/icon.bmp");
-    if (icon != NULL)
-    {
-        SDL_SetColorKey(icon, SDL_SRCCOLORKEY, SDL_MapRGB(icon->format, 0xff, 0x0, 0xff));
-        SDL_WM_SetIcon(icon, NULL);
-    }
-
-    // [HERE] Create Screen.
-
-    //	SDL_ShowCursor(SDL_DISABLE);		// SDL_ENABLE
-
-    /* Create an area the BeebEm emulator core (the Windows code)
-     * can draw on.  It's hardwired to an 800x600 8bit byte per pixel
-     * bitmap.
-     */
-    flags = SDL_SWSURFACE;
-    if ((video_output = SDL_CreateRGBSurface(flags, BEEBEM_VIDEO_CORE_SCREEN_WIDTH, BEEBEM_VIDEO_CORE_SCREEN_HEIGHT, 8,
-                                             0, 0, 0, 0)) == NULL)
-    {
-        fprintf(stderr, "Unable to create a bitmap buffer: %s\n", SDL_GetError());
-        return false;
-    }
-
-    // Create scaling table to convert 512/256 to 480/240
-    CreateScalingTable();
-
-    // Create the default screen.
-    int r = Create_Screen();
-
-    // Setup colors so we at least have something. The emulator core will
-    // changes these later when the fake registry is read, but we want
-    // enough colors set so the GUI (the message box) will be rendered
-    // correctly.
-    unsigned char cols[8];
-    SetBeebEmEmulatorCoresPalette(cols, BeebWin::RGB);
-
-    return r;
-
-    //	InitializeSDLSound(22050);		// Fix hardwiring later..
-    //	SDL_Delay(500);				// Give sound some time to init
-    //	return true;
-}
 
 void UninitializeSDL(void)
 {
@@ -722,7 +700,7 @@ void UninitializeSDL(void)
 
     SDL_CloseAudio();
     SDL_ShowCursor(SDL_ENABLE);
-    SDL_FreeSurface(video_output);
+    SDL_FreeSurface(beebSDL->video);
 }
 
 /* Timing:
@@ -988,7 +966,7 @@ void RenderLine(int line, int isTeletext, int xoffset)
     }
 
     // Make sure we're trying to draw within a sane part of the bitmap
-    if (video_output != NULL && screen_ptr != NULL)
+    if (beebSDL->video != NULL && screen_ptr != NULL)
     {
         SDL_Rect src, dst;
 
@@ -1008,20 +986,20 @@ void RenderLine(int line, int isTeletext, int xoffset)
                 break;
             case RESOLUTION_640X480_S:
                 // window_y = (window_y * 0.94);
-                window_y = GetScaledScanline(window_y);
+                window_y = beebSDL->ScaleValue(window_y);
                 break;
             case RESOLUTION_640X480_V:
                 // window_y = (window_y * 0.94);
-                window_y = GetScaledScanline(window_y);
+                window_y = beebSDL->ScaleValue(window_y);
                 break;
             case RESOLUTION_320X240_S:
                 // window_y = (window_y * 0.94);
-                window_y = GetScaledScanline(window_y);
+                window_y = beebSDL->ScaleValue(window_y);
                 disable_grille_for_teletext = 1;
                 break;
             case RESOLUTION_320X240_V:
                 // window_y = (window_y * 0.94);
-                window_y = GetScaledScanline(window_y);
+                window_y = beebSDL->ScaleValue(window_y);
                 disable_grille_for_teletext = 1;
                 break;
             case RESOLUTION_320X256:
@@ -1053,7 +1031,7 @@ void RenderLine(int line, int isTeletext, int xoffset)
 
                 if (dst.y < screen_ptr->h)
                 {
-                    SDL_BlitSurface(video_output, &src, screen_ptr, &dst);
+                    SDL_BlitSurface(beebSDL->video, &src, screen_ptr, &dst);
                     SDL_UpdateRect(screen_ptr, dst.x, dst.y, dst.w, dst.h);
                 }
                 //#ifdef EMULATE_CRT
@@ -1080,7 +1058,7 @@ void RenderLine(int line, int isTeletext, int xoffset)
                 break;
             case RESOLUTION_640X480_S:
                 // window_y = (window_y * 2 * 0.94);
-                window_y = GetScaledScanline(window_y * 2);
+                window_y = beebSDL->ScaleValue(window_y * 2);
                 scan_double = 1;
                 break;
             case RESOLUTION_640X480_V:
@@ -1090,7 +1068,7 @@ void RenderLine(int line, int isTeletext, int xoffset)
                 break;
             case RESOLUTION_320X240_S:
                 // window_y = ((window_y+1) * 0.94);
-                window_y = GetScaledScanline(window_y + 1);
+                window_y = beebSDL->ScaleValue(window_y + 1);
                 scan_double = 0;
                 break;
             case RESOLUTION_320X240_V:
@@ -1132,7 +1110,7 @@ void RenderLine(int line, int isTeletext, int xoffset)
 
             if (dst.h < screen_ptr->h)
             {
-                SDL_BlitSurface(video_output, &src, screen_ptr, &dst);
+                SDL_BlitSurface(beebSDL->video, &src, screen_ptr, &dst);
                 SDL_UpdateRect(screen_ptr, 0, window_y, screen_ptr->w, 1);
             }
 
@@ -1182,7 +1160,7 @@ void RenderLine(int line, int isTeletext, int xoffset)
                 last_xoffset = xoffset;
         }
 
-        if (video_output != NULL && screen_ptr != NULL && line>=0 && line<512){
+        if (beebSDL->video != NULL && screen_ptr != NULL && line>=0 && line<512){
                 SDL_Rect src, dst;
 
                 if (isTeletext){
@@ -1192,7 +1170,7 @@ void RenderLine(int line, int isTeletext, int xoffset)
                         if ( cfg_EmulateCrtTeletext == 0 || (line & 1) == 1){
                                 src.x=0; src.y=line; src.w=SDL_WINDOW_WIDTH; src.h=1;
                                 dst.x=0; dst.y=line; dst.w=SDL_WINDOW_WIDTH; dst.h=1;
-                                SDL_BlitSurface(video_output, &src, screen_ptr, &dst);
+                                SDL_BlitSurface(beebSDL->video, &src, screen_ptr, &dst);
                                 SDL_UpdateRect(screen_ptr, dst.x, dst.y, dst.w, dst.h);
                         }
 
@@ -1219,7 +1197,7 @@ void RenderLine(int line, int isTeletext, int xoffset)
 
                         dst.h=1;
 
-                        SDL_BlitSurface(video_output, &src, screen_ptr, &dst);
+                        SDL_BlitSurface(beebSDL->video, &src, screen_ptr, &dst);
 //                        SDL_UpdateRect(screen_ptr, 0, window_y , SDL_WINDOW_WIDTH, 1);
             SDL_UpdateRect(screen_ptr, 0, window_y ,screen_ptr->w,1);
 
@@ -1247,8 +1225,8 @@ void RenderFullscreenFPS(const char *str, int y)
     rect.x = 640 - rect.w;
     rect.y = y;
 
-    SDL_FillRect(video_output, &rect, SDL_MapRGB(video_output->format, col.r, col.g, col.b));
-    EG_Draw_String(video_output, &col, EG_FALSE, &rect, 0, (char *)str);
+    SDL_FillRect(beebSDL->video, &rect, SDL_MapRGB(beebSDL->video->format, col.r, col.g, col.b));
+    EG_Draw_String(beebSDL->video, &col, EG_FALSE, &rect, 0, (char *)str);
 }
 
 void SetWindowTitle(char *title)
@@ -1260,7 +1238,7 @@ unsigned char *GetSDLScreenLinePtr(int line)
 {
     static int low = 1000, high = 0;
 
-    if (video_output == NULL)
+    if (beebSDL->video == NULL)
     {
         printf("ASKED TO RENDER SCANLINE BEFORE BUFFER CREATED.\n");
         exit(11);
@@ -1282,16 +1260,16 @@ unsigned char *GetSDLScreenLinePtr(int line)
     {
         // printf("*** ASKED TO RENDER TO LINE %d [low=%d, high=%d\n", line, low, high);
         // SDL_Delay(500);
-        return (unsigned char *)video_output->pixels;
+        return (unsigned char *)beebSDL->video->pixels;
     }
 
     if (line > 800 - 1)
     {
         // printf("*** ASKED TO RENDER TO LINE %d [low=%d, high=%d\n", line, low, high);
-        return (unsigned char *)video_output->pixels + 799 * video_output->pitch;
+        return (unsigned char *)beebSDL->video->pixels + 799 * beebSDL->video->pitch;
     }
 
-    return (unsigned char *)video_output->pixels + line * video_output->pitch;
+    return (unsigned char *)beebSDL->video->pixels + line * beebSDL->video->pitch;
 }
 
 /* Converts an SDL key into a BBC key.

@@ -96,6 +96,7 @@ int done = 0;
 int __argc = 0;
 char **__argv = NULL;
 BeebWin *mainWin = NULL;
+BeebSDL *beebSDL = NULL;
 
 int main(int argc, char *argv[])
 {
@@ -112,16 +113,8 @@ int main(int argc, char *argv[])
     Log_Init();
 
     /* Initialize SDL. */
-    if (InitializeSDL(argc, argv))
-    {
-        qFATAL("Initialized SDL.");
-        exit(1);
-    }
-    else
-    {
-        qFATAL("Unable to initialize SDL!");
-        exit(1);
-    }
+    beebSDL = new BeebSDL(argc, argv);
+
 
     /* Initialize GUI. */
     if (EG_Initialize() == EG_TRUE)
@@ -332,7 +325,7 @@ int main(int argc, char *argv[])
                          * (For games we can use another key, defaults to Windows Left
                          *  key for the moment).
                          */
-                        if (event.key.keysym.sym == SDLK_CAPSLOCK && cfg_HaveX11)
+                        if (event.key.keysym.sym == SDLK_CAPSLOCK && beebSDL->cfg_x11)
                         {
                             BeebKeyDown(4, 0);
                             X11_CapsLock_Down = 20;

@@ -23,13 +23,10 @@
             (void)SDL_UnlockSurface(s);                                                                                \
     }
 
-extern SDL_Surface *video_output;
 extern SDL_Surface *screen_ptr;
 
 /* Global configuration options:
  */
-
-extern int cfg_HaveX11;
 
 #define OPT_EMULATECRTGRAPHICS 30001
 #define CFG_EMULATECRTGRAPHICS "EmulateCrtGraphics"

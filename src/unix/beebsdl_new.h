@@ -22,6 +22,34 @@ Boston, MA  02110-1301, USA.
 extern int done;
 extern BeebWin *mainWin;
 
+class BeebSDL
+{
+  public:
+    BeebSDL(int argc, char *argv[]);
+    ~BeebSDL();
+    Uint32 ScaleValue(Uint32 v);
+
+    bool cfg_x11 = false;
+
+    // temp public
+    SDL_Surface *video = nullptr;
+
+  private:
+    SDL_Surface *icon = nullptr;
+    Uint32 scaling_table[1024];
+};
+
+inline Uint32 BeebSDL::ScaleValue(Uint32 v)
+{
+    if (v >= 1024)
+        return 0;
+    else
+        return this->scaling_table[v];
+}
+
+
+extern BeebSDL *beebSDL;
+
 /* XXX: If not used from C, function should be method of the BeebWin class. */
 inline void Quit(void)
 {
